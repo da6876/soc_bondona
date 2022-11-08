@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-5">
                                 <div class="quickview_pro_img">
-                                    <img src="public/home/img/product-img/product-1.jpg" alt="">
+                                    <img id="pro_img" class="pro_img" src="public/home/img/product-img/product-1.jpg" alt="">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-7">
@@ -24,9 +24,9 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
-                                    <h5 class="price">$120.99 <span>$130</span></h5>
+                                    <h5 class="price">$120.99 <span class="discount">$130</span></h5>
                                     <p class="details">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia expedita quibusdam aspernatur, sapiente consectetur accusantium perspiciatis praesentium eligendi, in fugiat?</p>
-                                    <a href="#">View Full Product Details</a>
+                                    <a href="#" onclick="showDetailsProduct()">View Full Product Details</a>
                                 </div>
                                 <!-- Add to Cart Form -->
                                 <form class="cart" method="post">
@@ -43,9 +43,9 @@
                                         <a href="wishlist.html" target="_blank"><i class="ti-heart"></i></a>
                                     </div>
                                     <!-- Compare -->
-                                    <div class="modal_pro_compare">
+                                    {{--<div class="modal_pro_compare">
                                         <a href="compare.html" target="_blank"><i class="ti-stats-up"></i></a>
-                                    </div>
+                                    </div>--}}
                                 </form>
 
                                 <div class="share_wf mt-30">

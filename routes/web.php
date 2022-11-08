@@ -27,6 +27,9 @@ Route::get('/nav', function () {
 Route::get('/product_view', function () {
     return view('product_view');
 });
+Route::get('product_views/{id}', 'ProductInfoControler@getSingleProductInfo');
+
+
 Route::get('/checkout', function () {
     return view('checkout');
 });

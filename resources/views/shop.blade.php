@@ -213,7 +213,7 @@
                                     <div class="product-img">
                                         <img src="{{$AllProducts->image1}}" alt="">
                                         <div class="product-quicview">
-                                            <a href="#" onclick="showProductModel('{{$AllProducts->Description}}','{{$AllProducts->PriceMRP}}','{{$AllProducts->PriceDiscount}}','{{$AllProducts->Details}}')"><i class="ti-plus"></i></a>
+                                            <a href="#" onclick="showProductModel('{{$AllProducts->Description}}','{{$AllProducts->PriceMRP}}','{{$AllProducts->PriceDiscount}}','{{$AllProducts->Details}}','{{$AllProducts->image1}}')"><i class="ti-plus"></i></a>
                                         </div>
                                     </div>
                                     <!-- Product Description -->
@@ -221,7 +221,7 @@
                                         <h4 class="product-price">৳ {{$AllProducts->PriceMRP}}</h4>
                                         <p>{{$AllProducts->Description}}</p>
                                         <!-- Add to Cart -->
-                                        <a href="#" class="add-to-cart-btn">ADD TO CART</a>
+                                        <a href="#" onclick="showDetailsProduct('{{$AllProducts->ProductID}}')" class="add-to-cart-btn">ADD TO CART</a>
                                     </div>
                                 </div>
                                 @endforeach
@@ -394,12 +394,13 @@
     @include('layouts.footer')
 
     <script>
-        function showProductModel(Description,price,PriceDiscount,Details) {
+        function showProductModel(Description,price,PriceDiscount,Details,Image) {
             $('#quickview').modal('show');
             $(".price").text('৳ '+price);
-            $("span").text('৳ '+PriceDiscount);
+            $(".discount").text('৳ '+PriceDiscount);
             $('.title').text(Description);
             $('.details').text(Details);
+            document.getElementById("pro_img").src = Image;
             $('#Status').val(data[0].Status);
 
 
@@ -423,6 +424,11 @@
                 });
             }
         }); */
+        }
+        
+        function showDetailsProduct(ID) {
+             var url = "{{ url('product_views') }}" + '/' + ID;
+            window.location.href = url;
         }
     </script>
 

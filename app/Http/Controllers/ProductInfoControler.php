@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Input;
 use DB;
 use Session;
 use Redirect;
@@ -272,7 +273,8 @@ class ProductInfoControler extends Controller
 
     }
 
-    public function getSingleProductInfo($id){
+    public function getSingleProductInfo(){
+        $firstName = Input::get('id');
         $AllProducts = DB::select('SELECT TB1.ProductID, TB1.ProductType,
                 TB2.Name as ProductTypeName,TB1.Color,TB4.Name as ColorName, TB1.Category,
                 TB5.Name as CategoryName, TB1.SubCategory,TB3.Name as SubCategoryName,
@@ -285,6 +287,8 @@ class ProductInfoControler extends Controller
                 AND TB1.Color = TB4.ProductColorId
                 AND TB1.Category = TB5.ProductCategoryId
                 AND TB1.SubCategory = TB3.ProductSubCategoryId;');
+
+        return view('product_view');
     }
 
     
