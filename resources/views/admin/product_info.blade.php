@@ -68,7 +68,6 @@
                             <th>#</th>
                             <th>Product Type</th>
                             <th>Color</th>
-                            <th>Size</th>
                             <th>Category</th>
                             <th>Sub-Category</th>
                             <th>Display Type</th>
@@ -122,25 +121,23 @@
                     <input type="hidden" name="ProductID" id="ProductID"/>
 
                     <div class="row g-2">
+                      <div class="col mb-6">
+                        <label for="Description" class="form-label">Description</label>
+                        <input type="text" id="Description" name="Description" class="form-control" placeholder="xxxx@xxx.xx" />
+                      </div>
                         <div class="col mb-6">
                           <label for="ProductType" class="form-label">Product Type</label>
                           <select class="form-select" id="ProductType" name="ProductType" aria-label="Default select example">
                             <option selected="">Select Product Type</option>
                           </select>
                         </div>
-                        <div class="col mb-6">
-                          <label for="Color" class="form-label">Color</label>
-                          <select class="form-select" id="Color" name="Color" aria-label="Default select example">
-                            <option selected="">Select Product Color</option>
-                          </select>
-                        </div>
                     </div>
                     
                     <div class="row g-2">
                         <div class="col mb-6">
-                          <label for="ProductSize" class="form-label">Product Size</label>
-                          <select class="form-select" id="ProductSize" name="ProductSize" aria-label="Default select example">
-                            <option selected="">Select Product Size</option>
+                          <label for="SubCategory" class="form-label">Product Sub-Category</label>
+                          <select class="form-select" id="SubCategory" name="SubCategory" aria-label="Default select example">
+                            <option selected="">Select Product Sub-Category</option>
                           </select>
                         </div>
                         <div class="col mb-6">
@@ -153,9 +150,9 @@
                     
                     <div class="row g-2">
                         <div class="col mb-6">
-                          <label for="SubCategory" class="form-label">Product Sub-Category</label>
-                          <select class="form-select" id="SubCategory" name="SubCategory" aria-label="Default select example">
-                            <option selected="">Select Product Sub-Category</option>
+                          <label for="Color" class="form-label">Color</label>
+                          <select class="form-select" id="Color" name="Color" aria-label="Default select example">
+                            <option selected="">Select Product Color</option>
                           </select>
                         </div>
                         <div class="col mb-6">
@@ -169,12 +166,7 @@
                         </div>
                     </div>
 
-                    <div class="row g-1">
-                        <div class="col mb-0">
-                          <label for="FullName" class="form-label">Description</label>
-                          <input type="text" id="Description" name="Description" class="form-control" placeholder="xxxx@xxx.xx" />
-                        </div>
-                    </div>
+              
 
                     <div class="row g-1">
                         <div class="col mb-0">
@@ -215,6 +207,56 @@
                         </select>
                       </div>
                     </div>
+
+                    <div class="row g-4">
+                      <div class="col mb-0">
+                        <label for="FullName" class="form-label">Image1</label>
+                        <input type="file" id="image1" name="image1" class="form-control" />
+                      </div>
+                      <div class="col mb-0">
+                        <label for="FullName" class="form-label">Image2</label>
+                        <input type="file" id="image2" name="image2" class="form-control" />
+                      </div>
+                      <div class="col mb-0">
+                        <label for="FullName" class="form-label">Image3</label>
+                        <input type="file" id="image3" name="image3" class="form-control"/>
+                      </div>
+                      <div class="col mb-0">
+                        <label for="FullName" class="form-label">Image4</label>
+                        <input type="file" id="image4" name="image4" class="form-control" />
+                      </div>
+                  </div>
+
+                  <div class="row g-4 images">
+                    <div class="col mb-0">
+                      <div class="row">
+                        <label for="FullName" class="form-label">Image1</label>
+                        <img id="myImg1" src="" width="100" height="140">
+                        <input type="hidden" id="images1" name="images1" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col mb-0">
+                        <div class="row">
+                        <label for="FullName" class="form-label">Image2</label>
+                        <img id="myImg2" src="" width="100" height="140">
+                        <input type="hidden" id="images2" name="images2" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col mb-0">
+                      <div class="row">
+                        <label for="FullName" class="form-label">Image3</label>
+                        <img id="myImg3" src="" width="100" height="140">
+                        <input type="hidden" id="images3" name="images3" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col mb-0">
+                      <div class="row">
+                          <label for="FullName" class="form-label">Image4</label>
+                          <img id="myImg4" src="" width="100" height="140">
+                          <input type="hidden" id="images4" name="images4" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -242,6 +284,7 @@
     function showModal(){
         $('.userInfoDataAdd form')[0].reset();
         $('#UserID').val("");
+        $('.images').hide();
         $('.userInfoDataAdd').modal('show');
     }
 
@@ -253,7 +296,6 @@
           {data: 'ProductID', name: 'ProductID'},
           {data: 'ProductType', name: 'ProductType'},
           {data: 'Color', name: 'Color'},
-          {data: 'Size', name: 'Size'},
           {data: 'Category', name: 'Category'},
           {data: 'SubCategory', name: 'SubCategory'},
           {data: 'DisplayType', name: 'DisplayType'},
@@ -313,9 +355,7 @@
                 $('.userInfoDataAdd').modal('show');
                 $('.modal-title').text(data[0].FullName+' Information');
                 $('#ProductID').val(data[0].ProductID);
-                ShowSize(data[0].ProductType)
                 $('#ProductType').val(data[0].ProductType);
-                $('#Color').val(data[0].Color);
                 $('#Size').val(data[0].Size);
                 $('#Category').val(data[0].Category);
                 ShowSubCategory(data[0].Category)
@@ -328,6 +368,16 @@
                 $('#PriceMRP').val(data[0].PriceMRP);
                 $('#PriceDiscount').val(data[0].PriceDiscount);
                 $('#Status').val(data[0].Status);
+                $('.images').show();
+                $('#images1').val(data[0].image1);
+                $('#images2').val(data[0].image2);
+                $('#images3').val(data[0].image3);
+                $('#images4').val(data[0].image4);
+                document.getElementById("myImg1").src = data[0].image1;
+                document.getElementById("myImg2").src = data[0].image2;
+                document.getElementById("myImg3").src = data[0].image3;
+                document.getElementById("myImg4").src = data[0].image4;
+
             }, error: function () {
                 swal({
                     title: "Oops",
@@ -501,38 +551,6 @@
       });
     }
     
-    $("#ProductType").change(function () {
-      var ProductID = this.value;
-      ShowSize(ProductID)
-    });
-
-    function ShowSize(ProductID){
-      var csrf_tokens = document.querySelector('meta[name="csrf-token"]').content;
-      url = "{{ url('ShowSubList') }}";
-      $.ajax({
-          url: url,
-          type: 'POST',
-          data: {'ViewType': 'Size', 'ProductID': ProductID,"_token": csrf_tokens},
-          datatype: 'JSON',
-          success: function (data) {
-              console.log("Size Get Successfully");
-              var category = $.parseJSON(data);
-              if (category != '') {
-                  var markup = "<option value=''>Select Size</option>";
-                  for (var x = 0; x < category.length; x++) {
-                      markup += "<option value=" + category[x].ProductSizeId + ">" + category[x].Name + "</option>";
-                  }
-                  $("#ProductSize").html(markup).show();
-              } else {
-                  var markup = "<option value=''>Select Size</option>";
-                  $("#ProductSize").html(markup).show();
-              }
-
-
-          }
-          
-      });
-    }
     </script>
   </body>
 </html>

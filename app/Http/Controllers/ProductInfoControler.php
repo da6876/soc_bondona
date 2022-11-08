@@ -36,7 +36,6 @@ class ProductInfoControler extends Controller
                 $data['ProductID'] = $request['ProductID'];
                 $data['ProductType'] = $request['ProductType'];
                 $data['Color'] = $request['Color'];
-                $data['Size'] = $request['ProductSize'];
                 $data['Category'] = $request['Category'];
                 $data['SubCategory'] = $request['SubCategory'];
                 $data['DisplayType'] = $request['DisplayType'];
@@ -52,11 +51,64 @@ class ProductInfoControler extends Controller
                 $data['UpdateBy'] = "";
                 $data['UpdateDate'] = "";
 
-                $result = DB::table('productinfo')->insert($data);
-                return json_encode(array(
-                    "statusCode" => 200,
-                    "statusMsg" => "Product Info Added Successfully"
+                $image1=$request['image1'];
+                $image2=$request['image2'];
+                $image3=$request['image3'];
+                $image4=$request['image4'];
+                if ($image1){
+                    $ran_one=str_random(6);
+                    $ext_one=strtolower($image1->getClientOriginalExtension());
+                    $one_full_name=$ran_one.'.'.$ext_one;
+                    $upload_path_one="public/allImages/productimage/";
+                    $image_url_one=$upload_path_one.$one_full_name;
+                    $success_one1=$image1->move($upload_path_one,$one_full_name);
+                    $data['image1']=$image_url_one;
+                }else{
+                    $data['image1']="No Image";
+                }
+
+                if ($image2){
+                    $ran_one=str_random(6);
+                    $ext_one=strtolower($image2->getClientOriginalExtension());
+                    $one_full_name=$ran_one.'.'.$ext_one;
+                    $upload_path_one="public/allImages/productimage/";
+                    $image_url_one=$upload_path_one.$one_full_name;
+                    $success_one2=$image2->move($upload_path_one,$one_full_name);
+                    $data['image2']=$image_url_one;
+                }else{
+                    $data['image2']="No Image";
+                }
+
+                if ($image3){
+                    $ran_one=str_random(6);
+                    $ext_one=strtolower($image3->getClientOriginalExtension());
+                    $one_full_name=$ran_one.'.'.$ext_one;
+                    $upload_path_one="public/allImages/productimage/";
+                    $image_url_one=$upload_path_one.$one_full_name;
+                    $success_one3=$image3->move($upload_path_one,$one_full_name);
+                    $data['image3']=$image_url_one;
+                }else{
+                    $data['image3']="No Image";
+                }
+
+                if ($image4){
+                    $ran_one=str_random(6);
+                    $ext_one=strtolower($image4->getClientOriginalExtension());
+                    $one_full_name=$ran_one.'.'.$ext_one;
+                    $upload_path_one="public/allImages/productimage/";
+                    $image_url_one=$upload_path_one.$one_full_name;
+                    $success_one4=$image4->move($upload_path_one,$one_full_name);
+                    $data['image4']=$image_url_one;
+                }else{
+                    $data['image4']="No Image";
+                }
+
+                 $result = DB::table('productinfo')->insert($data);
+                 return json_encode(array(
+                     "statusCode" => 200,
+                     "statusMsg" => "Product Info Added Successfully"
                 ));
+                
 
             }else{
 
@@ -64,7 +116,6 @@ class ProductInfoControler extends Controller
                 $data['ProductID'] = $request['ProductID'];
                 $data['ProductType'] = $request['ProductType'];
                 $data['Color'] = $request['Color'];
-                $data['Size'] = $request['ProductSize'];
                 $data['Category'] = $request['Category'];
                 $data['SubCategory'] = $request['SubCategory'];
                 $data['DisplayType'] = $request['DisplayType'];
@@ -77,6 +128,68 @@ class ProductInfoControler extends Controller
                 $data['Status'] = $request['Status'];
                 $data['UpdateBy'] = Session::get('Admin_UserID');
                 $data['UpdateDate'] =  $this->getDates();
+
+
+                $image1=$request['image1'];
+                $image2=$request['image2'];
+                $image3=$request['image3'];
+                $image4=$request['image4'];
+
+                if ($image1){
+                    $ran_one=str_random(6);
+                    $ext_one=strtolower($image1->getClientOriginalExtension());
+                    $one_full_name=$ran_one.'.'.$ext_one;
+                    $upload_path_one="public/allImages/productimage/";
+                    $image_url_one=$upload_path_one.$one_full_name;
+                    $success_one=$image1->move($upload_path_one,$one_full_name);
+                    $data['image1']=$image_url_one;
+
+                   // unlink($request['image1']);
+                }else{
+                    $data['image1']=$request['images1'];
+                }
+
+                if ($image2){
+                    $ran_one=str_random(6);
+                    $ext_one=strtolower($image2->getClientOriginalExtension());
+                    $one_full_name=$ran_one.'.'.$ext_one;
+                    $upload_path_one="public/allImages/productimage/";
+                    $image_url_one=$upload_path_one.$one_full_name;
+                    $success_one=$image2->move($upload_path_one,$one_full_name);
+                    $data['image2']=$image_url_one;
+
+                    //unlink($request['image2']);
+                }else{
+                    $data['image2']=$request['images2'];
+                }
+
+                if ($image3){
+                    $ran_one=str_random(6);
+                    $ext_one=strtolower($image3->getClientOriginalExtension());
+                    $one_full_name=$ran_one.'.'.$ext_one;
+                    $upload_path_one="public/allImages/productimage/";
+                    $image_url_one=$upload_path_one.$one_full_name;
+                    $success_one=$image3->move($upload_path_one,$one_full_name);
+                    $data['image3']=$image_url_one;
+
+                    //unlink($request['image3']);
+                }else{
+                    $data['image3']=$request['images3'];
+                }
+
+                if ($image4){
+                    $ran_one=str_random(6);
+                    $ext_one=strtolower($image4->getClientOriginalExtension());
+                    $one_full_name=$ran_one.'.'.$ext_one;
+                    $upload_path_one="public/allImages/productimage/";
+                    $image_url_one=$upload_path_one.$one_full_name;
+                    $success_one=$image4->move($upload_path_one,$one_full_name);
+                    $data['image4']=$image_url_one;
+
+                    //unlink($request['image4']);
+                }else{
+                    $data['image4']=$request['images4'];
+                }
 
 
                 DB::table('productinfo')
@@ -157,6 +270,21 @@ class ProductInfoControler extends Controller
             ->rawColumns(['action'])
             ->toJson();
 
+    }
+
+    public function getSingleProductInfo($id){
+        $AllProducts = DB::select('SELECT TB1.ProductID, TB1.ProductType,
+                TB2.Name as ProductTypeName,TB1.Color,TB4.Name as ColorName, TB1.Category,
+                TB5.Name as CategoryName, TB1.SubCategory,TB3.Name as SubCategoryName,
+                TB1.DisplayType, TB1.Description, TB1.Details, TB1.Material, TB1.Care,
+                TB1.PriceMRP, TB1.PriceDiscount, TB1.image1, TB1.image2, TB1.image3,
+                TB1.image4, TB1.Status, TB1.CreateBy, TB1.CreateDate, TB1.UpdateBy,
+                TB1.UpdateDate 
+                FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+                WHERE TB1.ProductType = TB2.ProductTypeId
+                AND TB1.Color = TB4.ProductColorId
+                AND TB1.Category = TB5.ProductCategoryId
+                AND TB1.SubCategory = TB3.ProductSubCategoryId;');
     }
 
     

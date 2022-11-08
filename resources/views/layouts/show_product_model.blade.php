@@ -25,7 +25,7 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
                                     <h5 class="price">$120.99 <span>$130</span></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia expedita quibusdam aspernatur, sapiente consectetur accusantium perspiciatis praesentium eligendi, in fugiat?</p>
+                                    <p class="details">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia expedita quibusdam aspernatur, sapiente consectetur accusantium perspiciatis praesentium eligendi, in fugiat?</p>
                                     <a href="#">View Full Product Details</a>
                                 </div>
                                 <!-- Add to Cart Form -->
