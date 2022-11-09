@@ -21,9 +21,35 @@
     </div>
 
     <div id="wrapper">
+        @foreach ($ProductsInfo as $Product)
+            @php
+              $Description = $Product->Description;
+              $Details = $Product->Details;
+              $Material = $Product->Material;
+              $ProductType = $Product->ProductType;
+              $Care = $Product->Care;
+              $PriceMRP = $Product->PriceMRP;
+              $PriceDiscount = $Product->PriceDiscount;
+              $image1 = $Product->image1;
+              $image2 = $Product->image2;
+              $image3 = $Product->image3;
+              $image4 = $Product->image4;
+              $ProductTypeName = $Product->ProductTypeName;
+              $CategoryName = $Product->CategoryName;
+              $SubCategoryName = $Product->SubCategoryName;
+              $DisplayType = $Product->DisplayType;
+
+              $ProductSize = DB::select("SELECT ProductSizeId, Name
+								FROM productsize
+								WHERE ProductTypeId = '$ProductType'
+                                and Status != 'Delete'");
+            @endphp
+            
+        @endforeach
+
 
         <!-- ****** Header Area Start ****** -->
-        @include ('layouts.header_area')
+        @include ('header_areas')
         <!-- ****** Header Area End ****** -->
 
         <section class="single_product_details_area section_padding_0_100">
@@ -35,35 +61,43 @@
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
 
                                 <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(public/home/img/product-img/product-9.jpg);">
+                                    @if($image1)
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(../{{$image1}});">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(public/home/img/product-img/product-2.jpg);">
+                                    @endif
+                                    @if($image2)
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(../{{$image2}});">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(public/home/img/product-img/product-3.jpg);">
+                                    @endif
+                                    @if($image3)
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(../{{$image3}});">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(public/home/img/product-img/product-4.jpg);">
+                                    @endif
+                                    @if($image4)
+                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(../{{$image4}});">
                                     </li>
+                                    @endif
                                 </ol>
 
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <a class="gallery_img" href="public/home/img/product-img/product-9.jpg">
-                                        <img class="d-block w-100" src="public/home/img/product-img/product-9.jpg" alt="First slide">
+                                        <a class="gallery_img" href="../{{$image1}}">
+                                        <img class="d-block w-100" src="../{{$image1}}" alt="First slide">
                                     </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" href="public/home/img/product-img/product-2.jpg">
-                                        <img class="d-block w-100" src="public/home/img/product-img/product-2.jpg" alt="Second slide">
+                                        <a class="gallery_img" href="../{{$image2}}">
+                                        <img class="d-block w-100" src="../{{$image2}}" alt="Second slide">
                                     </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" href="public/home/img/product-img/product-3.jpg">
-                                        <img class="d-block w-100" src="public/home/img/product-img/product-3.jpg" alt="Third slide">
+                                        <a class="gallery_img" href="../{{$image3}}">
+                                        <img class="d-block w-100" src="../{{$image3}}" alt="Third slide">
                                     </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" href="public/home/img/product-img/product-4.jpg">
-                                        <img class="d-block w-100" src="public/home/img/product-img/product-4.jpg" alt="Fourth slide">
+                                        <a class="gallery_img" href="../{{$image4}}">
+                                        <img class="d-block w-100" src="../{{$image4}}" alt="Fourth slide">
                                     </a>
                                     </div>
                                 </div>
@@ -74,9 +108,9 @@
                     <div class="col-12 col-md-6">
                         <div class="single_product_desc">
 
-                            <h4 class="title"><a href="#">Long Yellow Dress</a></h4>
+                            <h4 class="title"><a href="#">{{$Description}}</a></h4>
 
-                            <h4 class="price">$ 39.99</h4>
+                            <h4 class="price">৳ {{$PriceMRP}}</h4>
 
                             <p class="available">Available: <span class="text-muted">In Stock</span></p>
 
@@ -92,12 +126,9 @@
                                 <h6 class="widget-title">Size</h6>
                                 <div class="widget-desc">
                                     <ul>
-                                        <li><a href="#">32</a></li>
-                                        <li><a href="#">34</a></li>
-                                        <li><a href="#">36</a></li>
-                                        <li><a href="#">38</a></li>
-                                        <li><a href="#">40</a></li>
-                                        <li><a href="#">42</a></li>
+                                        @foreach($ProductSize as $ProductSize)
+                                        <li><a href="#" onclick="addSize('{{$ProductSize->ProductSizeId}}')">{{$ProductSize->Name}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -116,41 +147,41 @@
                                 <div class="card">
                                     <div class="card-header" role="tab" id="headingOne">
                                         <h6 class="mb-0">
-                                            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Information</a>
+                                            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Details</a>
                                         </h6>
                                     </div>
 
                                     <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</p>
-                                            <p>Approx length 66cm/26" (Based on a UK size 8 sample) Mixed fibres</p>
-                                            <p>The Model wears a UK size 8/ EU size 36/ US size 4 and her height is 5'8"</p>
+                                            <p>Details : <span class="text-muted">{{$Details}}</span></p>
+                                            <p>Product Type : <span class="text-muted">{{$ProductTypeName}}</span></p>
+                                            <p>Category : <span class="text-muted">{{$CategoryName}}</span></p>
+                                            <p>Sub-Category : <span class="text-muted">{{$SubCategoryName}}</span></p>
+                                            <p>Display Type : <span class="text-muted">{{$DisplayType}}</span></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-header" role="tab" id="headingTwo">
                                         <h6 class="mb-0">
-                                            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Cart Details</a>
+                                            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Material Details</a>
                                         </h6>
                                     </div>
                                     <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo quis in veritatis officia inventore, tempore provident dignissimos nemo, nulla quaerat. Quibusdam non, eos, voluptatem reprehenderit hic nam! Laboriosam, sapiente! Praesentium.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia magnam laborum eaque.</p>
+                                            <p>{{$Material}}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-header" role="tab" id="headingThree">
                                         <h6 class="mb-0">
-                                            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">shipping &amp; Returns</a>
+                                            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Care Details</a>
                                         </h6>
                                     </div>
                                     <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse quo sint repudiandae suscipit ab soluta delectus voluptate, vero vitae, tempore maxime rerum iste dolorem mollitia perferendis distinctio. Quibusdam laboriosam rerum distinctio. Repudiandae fugit odit, sequi id!</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae qui maxime consequatur laudantium temporibus ad et. A optio inventore deleniti ipsa.</p>
+                                            <p>{{$Care}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +192,16 @@
                 </div>
             </div>
         </section>
-
+        @php
+            $ProductsInfoByType = DB::select("SELECT TB1.ProductID,
+                TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
+                FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+                WHERE TB1.ProductType = TB2.ProductTypeId
+                AND TB1.Color = TB4.ProductColorId
+                AND TB1.Category = TB5.ProductCategoryId
+                AND TB1.SubCategory = TB3.ProductSubCategoryId
+                AND TB1.ProductType = '$ProductType';");
+        @endphp
 
         <!-- ****** Popular Brands Area Start ****** -->
         <section class="you_may_like_area clearfix">
@@ -177,11 +217,33 @@
                     <div class="col-12">
                         <div class="you_make_like_slider owl-carousel">
 
-                            <!-- Single gallery Item -->
+                            
+                            @foreach($ProductsInfoByType as $ProductsInfoByType)
                             <div class="single_gallery_item">
                                 <!-- Product Image -->
                                 <div class="product-img">
-                                    <img src="public/home/img/product-img/product-1.jpg" alt="">
+                                    <img src="../{{$ProductsInfoByType->image1}}" alt="">
+                                    <div class="product-quicview">
+                                        <a href="#" onclick="showProductModel('{{$ProductsInfoByType->Description}}','{{$ProductsInfoByType->PriceMRP}}',
+                                        '{{$ProductsInfoByType->PriceDiscount}}','{{$ProductsInfoByType->Details}}','{{$ProductsInfoByType->image1}}')">
+                                        <i class="ti-plus"></i>
+                                    </a>
+                                    </div>
+                                </div>
+                                <!-- Product Description -->
+                                <div class="product-description">
+                                    <h4 class="product-price">৳ {{$ProductsInfoByType->PriceMRP}}</h4>
+                                    <p>{{$ProductsInfoByType->Description}}</p>
+                                    <!-- Add to Cart -->
+                                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
+                                </div>
+                            </div>
+                            @endforeach
+{{-- 
+                            <div class="single_gallery_item">
+                                <!-- Product Image -->
+                                <div class="product-img">
+                                    <img src="../public/home/img/product-img/product-2.jpg" alt="">
                                     <div class="product-quicview">
                                         <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
                                     </div>
@@ -195,11 +257,10 @@
                                 </div>
                             </div>
 
-                            <!-- Single gallery Item -->
                             <div class="single_gallery_item">
                                 <!-- Product Image -->
                                 <div class="product-img">
-                                    <img src="public/home/img/product-img/product-2.jpg" alt="">
+                                    <img src="../public/home/img/product-img/product-3.jpg" alt="">
                                     <div class="product-quicview">
                                         <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
                                     </div>
@@ -213,11 +274,10 @@
                                 </div>
                             </div>
 
-                            <!-- Single gallery Item -->
                             <div class="single_gallery_item">
                                 <!-- Product Image -->
                                 <div class="product-img">
-                                    <img src="public/home/img/product-img/product-3.jpg" alt="">
+                                    <img src="../public/home/img/product-img/product-4.jpg" alt="">
                                     <div class="product-quicview">
                                         <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
                                     </div>
@@ -231,11 +291,10 @@
                                 </div>
                             </div>
 
-                            <!-- Single gallery Item -->
                             <div class="single_gallery_item">
                                 <!-- Product Image -->
                                 <div class="product-img">
-                                    <img src="public/home/img/product-img/product-4.jpg" alt="">
+                                    <img src="../public/home/img/product-img/product-5.jpg" alt="">
                                     <div class="product-quicview">
                                         <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
                                     </div>
@@ -247,25 +306,7 @@
                                     <!-- Add to Cart -->
                                     <a href="#" class="add-to-cart-btn">ADD TO CART</a>
                                 </div>
-                            </div>
-
-                            <!-- Single gallery Item -->
-                            <div class="single_gallery_item">
-                                <!-- Product Image -->
-                                <div class="product-img">
-                                    <img src="public/home/img/product-img/product-5.jpg" alt="">
-                                    <div class="product-quicview">
-                                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                                    </div>
-                                </div>
-                                <!-- Product Description -->
-                                <div class="product-description">
-                                    <h4 class="product-price">$39.90</h4>
-                                    <p>Jeans midi cocktail dress</p>
-                                    <!-- Add to Cart -->
-                                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                                </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -285,7 +326,22 @@
     <!-- /.wrapper end -->
     
     @include('layouts.footer')
-
+    <script>
+        function showProductModel(Description,price,PriceDiscount,Details,Image) {
+            $('#quickview').modal('show');
+            $(".price").text('৳ '+price);
+            $(".discount").text('৳ '+PriceDiscount);
+            $('.title').text(Description);
+            $('.details').text(Details);
+            document.getElementById("pro_img").src = "../"+Image;
+            $('#Status').val(data[0].Status);
+        }
+        
+        function showDetailsProduct(ID) {
+             var url = "{{ url('product_views') }}" + '/' + ID;
+            window.location.href = url;
+        }
+    </script>
 </body>
 
 </html>
