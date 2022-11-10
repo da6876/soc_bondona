@@ -11,6 +11,12 @@
         navbar.classList.remove("sticky");
       }
     } */
+    
+        
+    function showDetailsProduct(ID) {
+             var url = "{{ url('product_views') }}" + '/' + ID;
+            window.location.href = url;
+        }
     </script>
 <!-- jQuery (Necessary for All JavaScript Plugins) -->
 <script src="{{asset('public/home/js/jquery/jquery-2.2.4.min.js')}}"></script>
@@ -22,3 +28,4 @@
 <script src="{{asset('public/home/js/plugins.js')}}"></script>
 <!-- Active js -->
 <script src="{{asset('public/home/js/active.js')}}"></script>
+<script src="{{asset('public/js/sweetalert.min.js')}}"></script>

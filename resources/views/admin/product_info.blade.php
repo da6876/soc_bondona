@@ -72,7 +72,6 @@
                             <th>Sub-Category</th>
                             <th>Display Type</th>
                             <th>Description</th>
-                            <th>Details</th>
                             <th>Status</th>
                             <th>Create Date</th>
                             <th>Update Date</th>
@@ -300,7 +299,6 @@
           {data: 'SubCategory', name: 'SubCategory'},
           {data: 'DisplayType', name: 'DisplayType'},
           {data: 'Description', name: 'Description'},
-          {data: 'Details', name: 'Details'},
           {data: 'Status', name: 'Status'},
           {data: 'CreateDate', name: 'CreateDate'},
           {data: 'UpdateDate', name: 'UpdateDate'},

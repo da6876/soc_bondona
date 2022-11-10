@@ -1170,6 +1170,13 @@ img {
     color: #ff084e;
     display: block;
 }
+.product-description .view-to-product-btn {
+    margin-top: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #03e74f;
+    display: block;
+}
 
 .product-description .add-to-cart-btn:hover {
     color: #2a2a2a;

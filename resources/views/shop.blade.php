@@ -189,7 +189,14 @@
                                         <h4 class="product-price">৳ {{$AllProducts->PriceMRP}}</h4>
                                         <p>{{$AllProducts->Description}}</p>
                                         <!-- Add to Cart -->
-                                        <a href="#" onclick="showDetailsProduct('{{$AllProducts->ProductID}}')" class="add-to-cart-btn">ADD TO CART</a>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="#" class="add-to-cart-btn">ADD TO CART</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="#" onclick="showDetailsProduct('{{$AllProducts->ProductID}}')" class="view-to-product-btn">View Product</a>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                                 @endforeach
@@ -392,11 +399,6 @@
                 });
             }
         }); */
-        }
-        
-        function showDetailsProduct(ID) {
-             var url = "{{ url('product_views') }}" + '/' + ID;
-            window.location.href = url;
         }
     </script>
 

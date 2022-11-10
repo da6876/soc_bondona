@@ -288,11 +288,36 @@ class ProductInfoControler extends Controller
         AND TB1.Category = TB5.ProductCategoryId
         AND TB1.SubCategory = TB3.ProductSubCategoryId
         AND TB1.ProductID = '$ProductID';");
-/* return json_encode(
-    $ProductsInfo
-); */
+
 		return view('product_view',['ProductsInfo'=>$ProductsInfo]);
-       // return view('product_view');
+    }
+
+    public function addToCart(Request $request){
+        $data = array();
+        $data['ProductID'] =  $request['ProductID'];
+        $data['CustomerID'] =  $request['CustomerID'];
+        $data['ProductCode'] =  $request['ProductCode'];
+        $data['Quantity'] =  $request['Quantity'];
+        $data['Status'] =  "P";
+        $data['CreateBy'] = $request['CustomerID'];
+        $data['CreateDate'] = $this->getDates();
+        $data['UpdateBy'] = "";
+        $data['UpdateDate'] = "";
+        
+        
+        $result = DB::table('shopingcard')->insert($data);
+        if($result){
+            return json_encode(array(
+                "statusCode" => 200,
+                "statusMsg" => "Product Add to Cart Successfully !"
+            ));
+        }else{
+            return json_encode(array(
+                "statusCode" => 201,
+                "statusMsg" => "Product Add to Cart Failed !"
+           ));
+        }
+        return json_encode($data );
     }
 
     
