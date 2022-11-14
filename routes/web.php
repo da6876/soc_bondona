@@ -87,6 +87,14 @@ Route::get('/get/all/ProductInfo','ProductInfoControler@getAllProductInfo')->nam
 
 Route::resource('ProductSize','ProductSizeControler');
 Route::get('/get/all/ProductSize','ProductSizeControler@getProductSize')->name('all.ProductSize');
+
+
+Route::resource('MenuItem','MenuItemController');
+Route::get('/get/all/MenuItem','MenuItemController@getMenuItem')->name('all.MenuItem');
+
+
+Route::resource('CustomerInfo','CustomerInfoController');
+Route::get('/get/all/CustomerInfo','CustomerInfoController@getCustomerInfo')->name('all.CustomerInfo');
 /*
 |--------------------------------------------------------------------------
 | Web Admin Routes End

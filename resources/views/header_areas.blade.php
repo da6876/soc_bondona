@@ -8,7 +8,7 @@
                     <div class="top_single_area d-flex align-items-center">
                         <!-- Logo Area -->
                         <div class="top_logo">
-                            <a href="#"><img src="../public/home/img/core-img/logo.png" alt=""></a>
+                            <a href="#"><img src="../public/home/img/core-img/bondonalogo.png" alt=""></a>
                         </div>
                         <!-- Cart & Menu Area -->
                         <div class="header-cart-menu d-flex align-items-center ml-auto">
@@ -71,20 +71,25 @@
 
                             <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
                                 <ul class="navbar-nav animated" id="nav">
-                                    <li class="nav-item active"><a class="nav-link" href="{{url('/')}}">Home</a></li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                        <div class="dropdown-menu" aria-labelledby="karlDropdown">
-                                            <a class="dropdown-item" href="{{url('/')}}">Homes</a>
-                                            <a class="dropdown-item" href="{{url('shop')}}">Shop</a>
-                                            <a class="dropdown-item" href="{{url('product_view')}}">Product Details</a>
-                                            <a class="dropdown-item" href="{{url('cart')}}">Cart</a>
-                                            <a class="dropdown-item" href="{{url('checkout')}}">Checkout</a>
-                                        </div>
+                                    @php
+                                        $MenuItem = DB::select("SELECT Name, Link,Other
+                                        FROM menu_item
+                                        WHERE Status = 'Active'");
+                                    @endphp
+
+                                    @foreach($MenuItem as $MenuItem)
+                                    @php
+                                        $linkName = $MenuItem->Link;
+                                    @endphp
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="{{url($linkName)}}">
+                                                @if($MenuItem->Other=="Hot")
+                                                    <span class="karl-level">New</span>
+                                                @endif
+                                            {{$MenuItem->Name}}
+                                            </a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Dresses</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"><span class="karl-level">hot</span> Shoes</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </nav>

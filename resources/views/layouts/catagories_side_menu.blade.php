@@ -1,3 +1,8 @@
+@php
+$ProductCategory = DB::select("SELECT ProductCategoryId, Name
+                  FROM productcategory
+                  WHERE Status != 'Delete'");
+@endphp
 <!-- Close Icon -->
 <div id="sideMenuClose">
     <i class="ti-close"></i>
@@ -7,8 +12,23 @@
     <div class="menu-list">
         <h6>Categories</h6>
         <ul id="menu-content" class="menu-content collapse out">
-            <!-- Single Item -->
-            <li data-toggle="collapse" data-target="#women" class="collapsed active">
+            @foreach($ProductCategory as $ProductCategory)                                        
+            <li data-toggle="collapse" class="collapsed" data-target="#{{$ProductCategory->ProductCategoryId}}">
+                <a href="#">{{$ProductCategory->Name}}</a>
+                <ul class="sub-menu collapse" id="{{$ProductCategory->ProductCategoryId}}">
+                    @php
+                        $ProductSubCategory = DB::select("SELECT ProductSubCategoryId, Name
+                                FROM productsubcategory
+                                WHERE Status != 'Delete'
+                                and Category_Id= '$ProductCategory->ProductCategoryId'");
+                    @endphp 
+                    @foreach($ProductSubCategory as $ProductSubCategory) 
+                        <li><a href="#" onclick="subcat('{{$ProductSubCategory->ProductSubCategoryId}}')">{{$ProductSubCategory->Name}}</a></li>
+                    @endforeach
+                </ul>
+            </li>
+            @endforeach
+            {{-- <li data-toggle="collapse" data-target="#women" class="collapsed active">
                 <a href="#">Woman wear <span class="arrow"></span></a>
                 <ul class="sub-menu collapse" id="women">
                     <li><a href="#">Midi Dresses</a></li>
@@ -18,7 +38,6 @@
                     <li><a href="#">Mini Dresses</a></li>
                 </ul>
             </li>
-            <!-- Single Item -->
             <li data-toggle="collapse" data-target="#man" class="collapsed">
                 <a href="#">Man Wear <span class="arrow"></span></a>
                 <ul class="sub-menu collapse" id="man">
@@ -27,7 +46,6 @@
                     <li><a href="#">Man Mini Dresses</a></li>
                 </ul>
             </li>
-            <!-- Single Item -->
             <li data-toggle="collapse" data-target="#kids" class="collapsed">
                 <a href="#">Children <span class="arrow"></span></a>
                 <ul class="sub-menu collapse" id="kids">
@@ -35,7 +53,6 @@
                     <li><a href="#">Mini Dresses</a></li>
                 </ul>
             </li>
-            <!-- Single Item -->
             <li data-toggle="collapse" data-target="#bags" class="collapsed">
                 <a href="#">Bags &amp; Purses <span class="arrow"></span></a>
                 <ul class="sub-menu collapse" id="bags">
@@ -43,7 +60,6 @@
                     <li><a href="#">Purses</a></li>
                 </ul>
             </li>
-            <!-- Single Item -->
             <li data-toggle="collapse" data-target="#eyewear" class="collapsed">
                 <a href="#">Eyewear <span class="arrow"></span></a>
                 <ul class="sub-menu collapse" id="eyewear">
@@ -52,7 +68,6 @@
                     <li><a href="#">Eyewear Style 3</a></li>
                 </ul>
             </li>
-            <!-- Single Item -->
             <li data-toggle="collapse" data-target="#footwear" class="collapsed">
                 <a href="#">Footwear <span class="arrow"></span></a>
                 <ul class="sub-menu collapse" id="footwear">
@@ -60,7 +75,7 @@
                     <li><a href="#">Footwear 2</a></li>
                     <li><a href="#">Footwear 3</a></li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -146,7 +147,7 @@
                                         <input type="number" class="qty-text" id="Quantity" step="1" min="1" max="12" name="Quantity" value="1">
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     </div>
-                                    <button type="button" onclick="addToCart()" name="addtocart" value="5" class="btn cart-submit d-block">Add to cart</button>
+                                    <button type="button" onclick="showalert()" name="addtocart" value="5" class="btn cart-submit d-block">Add to cart</button>
                                 </form>
                             </div>
                             <div id="accordion" role="tablist">
@@ -274,9 +275,14 @@
     @include('layouts.footer')
     <script>
 
+        function showalert(){
+            $('#showAlertForLogin').modal('show');
+        }
+
         function addToCart() {
             var CustomerID  = $("#CustomerID").val();
             if(CustomerID!=""){
+
                 /* url = "{{ url('AddToCart') }}";
                 $.ajax({
                     url: url,
@@ -296,32 +302,28 @@
                     icon: "error",
                     timer: '3000'
                 }); */
+
+
                 alert("Success !!"+CustomerID );
                 
             }else{
                 var url = "{{ url('/') }}";
-                swal("For Add To Card, Please Login or SingUp !!", {
+                swal("For Add To Card, Please Login or SingUp !!", 
+                {
                     buttons: {
-                        cancel: "SignUp!",
+                        cancel: "SignUp",
                         catch: "Login",
                         defeat: "Continew",
-                    },
-                    })
-                    .then((value) => {
+                    },}).then((value) => {
                         switch (value) {
-                        
                             case "cancel":
-                            //swal("Pikachu fainted! You gained 500 XP!");
-                            loginHere();
-                            break;
-                        
+                                signHere();
+                                break;
                             case "catch":
-                            //swal("Gotcha!", "Pikachu was caught!", "success");
-                            loginHere();
-                            break;
-                        
+                                loginHere();
+                                break;
                             default:
-                            swal("Continew As Gest !");
+                                swal("Continew As Gest !");
                         }
                     }
                 );
@@ -345,10 +347,6 @@
             window.location.href = url;
         }
 
-        function loginHere(){
-            $('#CustomerLogin').modal('show');
-            
-        }
 
     </script>
 </body>

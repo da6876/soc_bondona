@@ -78,61 +78,47 @@
                         
                             
                             <!-- Pills content -->
-                            <div class="tab-content">
+                            <div class="tab-content" id="CustomerInfoDataAdd">
                                 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                                <form>
-                                    <div class="text-center mb-3">
-                                        <p>Sign in with:</p>
-                                        
-                                        <button type="button" class="btn btn-link btn-floating mx-1">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </button>
-                            
-                                        <button type="button" class="btn btn-link btn-floating mx-1">
-                                            <i class="fab fa-google"></i>
-                                        </button>
-                            
-                                        <button type="button" class="btn btn-link btn-floating mx-1">
-                                            <i class="fab fa-twitter"></i>
-                                        </button>
                                 
-                                        <button type="button" class="btn btn-link btn-floating mx-1">
-                                            <i class="fab fa-github"></i>
-                                        </button>
+                                <form  action="#" method="post" enctype="multipart/form-data">
+                                    {{csrf_field()}}
+                                    <div class="text-center mb-3">
+                                        
+                                    <div class="top_logo">
+                                        <a href="#"><img src="../public/home/img/core-img/bondonalogo.png" alt=""></a>
                                     </div>
-                            
-                                    <p class="text-center">or:</p>
-                            
-                                    <!-- Email input -->
+                                    <br>
+                                    <h5>Sign in Here</h5>
+                                    </div>
+                                                    
                                     <div class="form-outline mb-4">
-                                    <input type="email" id="loginName" class="form-control" />
-                                    <label class="form-label" for="loginName">Email or username</label>
+                                        <label class="form-label" for="loginName">Email or username</label>
+                                        <input type="email" id="loginName" class="form-control" />
                                     </div>
                             
-                                    <!-- Password input -->
                                     <div class="form-outline mb-4">
-                                    <input type="password" id="loginPassword" class="form-control" />
-                                    <label class="form-label" for="loginPassword">Password</label>
+                                        <label class="form-label" for="loginPassword">Password</label>
+                                        <input type="password" id="loginPassword" class="form-control" />
                                     </div>
                             
-                                    <!-- 2 column grid layout -->
                                     <div class="row mb-4">
-                                    <div class="col-md-6 d-flex justify-content-center">
-                                        <!-- Checkbox -->
-                                        <div class="form-check mb-3 mb-md-0">
-                                        <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-                                        <label class="form-check-label" for="loginCheck"> Remember me </label>
+                                        <div class="col-md-6 d-flex justify-content-center">
+                                            <!-- Checkbox -->
+                                            <div class="form-check mb-3 mb-md-0">
+                                            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                                            <label class="form-check-label" for="loginCheck"> Remember me </label>
+                                            </div>
+                                        </div>
+                                
+                                        <div class="col-md-6 d-flex justify-content-center">
+                                            <!-- Simple link -->
+                                            <a href="#!">Forgot password?</a>
                                         </div>
                                     </div>
                             
-                                    <div class="col-md-6 d-flex justify-content-center">
-                                        <!-- Simple link -->
-                                        <a href="#!">Forgot password?</a>
-                                    </div>
-                                    </div>
-                            
                                     <!-- Submit button -->
-                                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                                    <button type="button" onclick="checkData()" class="btn btn-primary btn-block mb-4">Sign in</button>
                             
                                     <!-- Register buttons -->
                                     <div class="text-center">
@@ -148,3 +134,128 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="CustomerSignUp" tabindex="-1" role="dialog" aria-labelledby="CustomerLogin" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+        </button>
+
+            <div class="modal-body">
+                <div class="quickview_body">
+                    <div class="container">
+                        
+                            
+                            <!-- Pills content -->
+                            <div class="tab-content" id="CustomerInfoDataAdd">
+                                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                                
+                                        
+                                <div class="top_logo text-center">
+                                    <a href="#"><img src="../public/home/img/core-img/bondonalogo.png" alt=""></a>
+                                </div>
+                                <hr>
+                                <form  action="#" method="post" enctype="multipart/form-data">
+                                    {{csrf_field()}}
+                                    <div class="row g-1">
+                                        <div class="col mb-0">
+                                          <input type="hidden" id="UserID" name="UserID"/>
+                                          <label for="FirstName" class="form-label">First Name</label>
+                                          <input type="text" id="FirstName" name="FirstName" class="form-control" placeholder="xxxx@xxx.xx" />
+                                        </div>
+                                        <div class="col mb-0">
+                                          <label for="LastName" class="form-label">Last Name</label>
+                                          <input type="text" id="LastName" name="LastName" class="form-control" placeholder="xxxx@xxx.xx" />
+                                        </div>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col mb-6">
+                                          <label for="MobileNo" class="form-label">Mobile No</label>
+                                          <input type="text" id="MobileNo" name="MobileNo" class="form-control" placeholder="xxxx@xxx.xx" />
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="1" id="Primary1" name="Primary1">
+                                            <label class="form-check-label" for="Primary1">
+                                              Set As Primary ID
+                                            </label>
+                                          </div>
+                                        </div>
+                                        <div class="col mb-6">
+                                          <label for="Email" class="form-label">Email</label>
+                                          <input type="email" id="Email" name="Email" class="form-control" placeholder="xxxx@xxx.xx" />
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="1" id="Primary2" name="Primary2">
+                                            <label class="form-check-label" for="Primary2">
+                                              Set As Primary ID
+                                            </label>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="row g-1">
+                                        <div class="col mb-12">
+                                          <label for="Address" class="form-label">Address</label>
+                                          <input type="text" id="Address" class="form-control" placeholder="xxxx@xxx.xx" name="Address" />
+                                        </div>
+                                    </div>
+                                    <div class="row g-1">
+                                        <div class="col mb-0">
+                                          <label for="picture" class="form-label">Picture</label>
+                                          <input type="file" id="picture" class="form-control" name="picture" />
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label for="Password" class="form-label">Password</label>
+                                            <input type="password" id="Password" class="form-control" placeholder="xxxx@xxx.xx" name="Password" />
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="button" onclick="checkData()" class="btn btn-primary btn-block mb-4">Sign in</button>
+                                    <div class="text-center">
+                                        <p>Already a Member? <a href="#!">LogIn</a></p>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                            <!-- Pills content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="showAlertForLogin" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Sorry !!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="top_logo">
+                <a href="#"><img src="../public/home/img/core-img/bondonalogo.png" alt=""></a>
+            </div>
+          <h5>Please Login Here. Or Sign Up</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="signHere()" class="btn btn-primary">Sign Up</button>
+          <button type="button" onclick="loginHere()" class="btn btn-info">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+    function loginHere(){
+        $('#showAlertForLogin').modal('hide');
+        $('#CustomerLogin').modal('show');
+    }
+
+    function signHere(){
+        $('#showAlertForLogin').modal('hide');
+        $('#CustomerSignUp').modal('show');
+    }
+
+</script>

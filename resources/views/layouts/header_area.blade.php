@@ -8,7 +8,7 @@
                     <div class="top_single_area d-flex align-items-center">
                         <!-- Logo Area -->
                         <div class="top_logo">
-                            <a href="#"><img src="public/home/img/core-img/logo.png" alt=""></a>
+                            <a href="#"><img src="public/home/img/core-img/bondonalogo.png" alt=""></a>
                         </div>
                         <!-- Cart & Menu Area -->
                         <div class="header-cart-menu d-flex align-items-center ml-auto">
@@ -71,7 +71,7 @@
 
                             <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
                                 <ul class="navbar-nav animated" id="nav">
-                                    <li class="nav-item active"><a class="nav-link" href="{{url('/')}}">Home</a></li>
+                                    
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                                         <div class="dropdown-menu" aria-labelledby="karlDropdown">

@@ -6,7 +6,7 @@
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="single_footer_area">
                             <div class="footer-logo">
-                                <img src="public/home/img/core-img/logo.png" alt="">
+                                <img src="public/home/img/core-img/bondonalogo.png" alt="">
                             </div>
                             <div class="copywrite_text d-flex align-items-center">
                                 <p>

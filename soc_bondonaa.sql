@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2022 at 06:26 PM
+-- Generation Time: Nov 14, 2022 at 01:19 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -43,6 +43,43 @@ CREATE TABLE `customerinfo` (
   `UpdateBy` varchar(20) DEFAULT NULL,
   `UpdateDate` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customerinfo`
+--
+
+INSERT INTO `customerinfo` (`CustomerID`, `LoginID`, `Password`, `FirstName`, `LastName`, `picture`, `MobileNo`, `Email`, `Address`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
+(20000, '0147852369', '123456', 'Abir', 'Dhali', 'No Image', '0147852369', '1vv@gmail.com', 'Dhali6876,nnn', 'Delete', '10000', '14/11/2022', '', ''),
+(20001, '0147410147', 'e10adc3949ba59abbe56e057f20f883e', 'Dhali', 'Abir', 'public/allImages/CustomerImage/BwEufb.jpg', '0147410147', 'dhali6876@gmail.com', 'Dhaka,Bnagladehs', 'Active', '10000', '14/11/2022', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_item`
+--
+
+CREATE TABLE `menu_item` (
+  `menu_item_id` int(6) NOT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Link` varchar(50) NOT NULL,
+  `Other` varchar(20) NOT NULL,
+  `Status` varchar(20) NOT NULL,
+  `CreateBy` varchar(20) NOT NULL,
+  `CreateDate` varchar(20) NOT NULL,
+  `UpdateBy` varchar(20) DEFAULT NULL,
+  `UpdateDate` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `menu_item`
+--
+
+INSERT INTO `menu_item` (`menu_item_id`, `Name`, `Link`, `Other`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
+(1, 'Home', '/', 'Home', 'Active', '10000', '13/11/2022', '10000', '13/11/2022'),
+(2, 'Shop', 'shop', 'Shop', 'Active', '10000', '13/11/2022', '10000', '13/11/2022'),
+(3, 'Women Collection', '#', 'Hot', 'Active', '10000', '13/11/2022', '10000', '13/11/2022'),
+(4, 'Men Collection', '#', 'Hot', 'Active', '10000', '13/11/2022', '10000', '13/11/2022'),
+(5, 'Contact', 'Contact', 'Contact', 'Active', '10000', '13/11/2022', '', '');
 
 -- --------------------------------------------------------
 
@@ -86,10 +123,16 @@ CREATE TABLE `productcategory` (
 --
 
 INSERT INTO `productcategory` (`ProductCategoryId`, `Name`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
-(30000, 'Category 2', 'Active', '10000', '02/11/2022', '10000', '02/11/2022'),
+(30000, 'Category 2', 'Delete', '10000', '02/11/2022', '10000', '02/11/2022'),
 (30001, 'PRODUCT CATEGORY NAME 22', 'Delete', '10000', '02/11/2022', '10000', '02/11/2022'),
-(30002, 'Category 3', 'Active', '10000', '02/11/2022', '', ''),
-(30003, 'Panjabi', 'Active', '10000', '07/11/2022', '', '');
+(30002, 'Category 3', 'Delete', '10000', '02/11/2022', '', ''),
+(30003, 'Panjabi', 'Active', '10000', '07/11/2022', '', ''),
+(30004, 'Woman wear', 'Active', '10000', '09/11/2022', '', ''),
+(30005, 'Man Wear', 'Active', '10000', '09/11/2022', '', ''),
+(30006, 'Children', 'Active', '10000', '09/11/2022', '', ''),
+(30007, 'Bags & Purses', 'Active', '10000', '09/11/2022', '', ''),
+(30008, 'Eyewear', 'Active', '10000', '09/11/2022', '', ''),
+(30009, 'Footwear', 'Active', '10000', '09/11/2022', '', '');
 
 -- --------------------------------------------------------
 
@@ -154,11 +197,11 @@ CREATE TABLE `productinfo` (
 --
 
 INSERT INTO `productinfo` (`ProductID`, `ProductType`, `Color`, `Size`, `Category`, `SubCategory`, `DisplayType`, `Description`, `Details`, `Material`, `Care`, `PriceMRP`, `PriceDiscount`, `image1`, `image2`, `image3`, `image4`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
-(110000, 30000, 30001, 30002, 30000, 30002, 'Top', 'DESCRIPaaTION', 'DETAILS asdasd', 'MATERIAL asdasd', 'CAREasd asd a', '500', '560', 'public/allImages/productimage/84c5UF.webp', 'No Image', 'No Image', 'No Image', 'Active', '10000', '05/11/2022', '10000', '05/11/2022'),
-(110001, 30000, 30000, 30002, 30000, 30002, 'Features', 'DESCRIPTION Shirt', 'DETAILS Shirt', 'MATERIAL Shirt', 'CARE Shirt', '600', '680', 'public/allImages/productimage/84c5UF.webp', 'No Image', 'No Image', 'No Image', 'Active', '10000', '05/11/2022', '10000', '05/11/2022'),
+(110000, 30000, 30001, 30002, 30005, 30009, 'Top', 'Green polo t shirt', 'Colour T shirts Gsm: 180 Colours: 10 Types Size: M,L,XL (Asian standard), (One carton) Minimun Purchase: 50pcs Wholesale.any colour.', 'T shirts Gsm', 'One carton', '500', '560', 'public/allImages/productimage/cVgAym.jpg', 'public/allImages/productimage/BjHxp9.jpg', 'public/allImages/productimage/ku5QHC.jpg', 'public/allImages/productimage/9k0eOt.jpg', 'Active', '10000', '05/11/2022', '10000', '10/11/2022'),
+(110001, 30000, 30004, 30002, 30005, 30009, 'Top', 'Black Cotton Formal Shirt For Men', 'ip fashion  is one of the popular brand for all type of fashion products at reasonable price. They provide us different types of fashion items very frequently. Shop your choice from this seller!', 'Cotton', 'Cotton', '600', '680', 'public/allImages/productimage/4aM2sq.jpg', 'public/allImages/productimage/69qPv8.jpg', 'public/allImages/productimage/7HkHJ0.jpg', 'public/allImages/productimage/b9J6t2.jpg', 'Active', '10000', '05/11/2022', '10000', '10/11/2022'),
 (110002, 30003, 30004, 30004, 30003, 30003, 'New', 'Brown Printed and Embroidered Viscose-Cotton Panjabi', 'White and brown printed viscose-cotton panjabi with mustard and beige embroidery.', 'Viscott (Viscose & Cotton)', 'Hand Wash With Mild Detergent In Cold Water', '2502.33', '2,302.33', 'public/allImages/productimage/84c5UF.webp', 'No Image', 'No Image', 'No Image', 'Active', '10000', '07/11/2022', '', ''),
 (110003, 30003, 30004, 30005, 30003, 30003, 'New', 'Olive Sand Splash Dyed and Embroidered Silk Panjabi', 'Olive sand splash dyed silk panjabi with black embroidery.', 'Silk', 'Dry Clean', '9265.12', '9565.12', 'public/allImages/productimage/84c5UF.webp', 'No Image', 'No Image', 'No Image', 'Active', '10000', '07/11/2022', '', ''),
-(110004, 30003, 30004, 30006, 30003, 30003, 'New', 'Ivory Striped Cotton Panjabi', 'Ivory striped cotton panjabi. Try yours with pajama, waistcoat and other accessories.', 'Cotton', 'Band Collar', '2065.12', '2265.12', 'public/allImages/productimage/84c5UF.webp', 'No Image', 'No Image', 'No Image', 'Active', '10000', '07/11/2022', '', ''),
+(110004, 30003, 30004, 30006, 30003, 30003, 'Features', 'Ivory Striped Cotton Panjabi', 'Ivory striped cotton panjabi. Try yours with pajama, waistcoat and other accessories.', 'Cotton', 'Band Collar', '2065.12', '2265.12', 'public/allImages/productimage/84c5UF.webp', 'public/allImages/productimage/Sl3xmH.jpg', 'No Image', 'No Image', 'Active', '10000', '07/11/2022', '10000', '10/11/2022'),
 (110005, 30003, 30004, 30007, 30003, 30003, 'New', 'Ivory Striped Cotton Panjabi', 'Ivory striped cotton panjabi. Try yours with pajama, waistcoat and other accessories.', 'Cotton', 'Hand Wash With Mild Detergent In Cold Water', '2065.12', '2565.12', 'public/allImages/productimage/84c5UF.webp', 'public/allImages/productimage/VWAn8J.webp', 'public/allImages/productimage/78xT7H.webp', 'public/allImages/productimage/mrFf0O.webp', 'Active', '10000', '07/11/2022', '', ''),
 (110006, 30003, 30004, 30007, 30003, 30003, 'New', 'TEST', 'test', 'test', 'test', '222', '222', 'public/allImages/productimage/vlTrNp.jpg', 'public/allImages/productimage/2p2QOI.jpg', 'public/allImages/productimage/0zhF7q.jpg', 'public/allImages/productimage/QAouEt.jpg', 'Active', '10000', '08/11/2022', '10000', '08/11/2022'),
 (110007, 30003, 30001, 0, 30003, 30003, 'New', 'Semi Long Linen Panjabi For Men', 'Semi Long Linen Panjabi For Men', 'cotton', 'stylish and fashionable', '300', '600', 'public/allImages/productimage/ThrXoc.jpg', 'public/allImages/productimage/Cuq8AB.jpg', 'public/allImages/productimage/PywIqq.jpg', 'public/allImages/productimage/5qLXhA.jpg', 'Active', '10000', '08/11/2022', '', '');
@@ -237,10 +280,23 @@ CREATE TABLE `productsubcategory` (
 --
 
 INSERT INTO `productsubcategory` (`ProductSubCategoryId`, `Name`, `Category_Id`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
-(30000, 'PRODUCT TYPE NAME 1', 30002, 'InActive', '10000', '02/11/2022', '10000', '07/11/2022'),
+(30000, 'PRODUCT TYPE NAME 1', 30002, 'Delete', '10000', '02/11/2022', '10000', '07/11/2022'),
 (30001, 'PRODUCT TYPE NAME 22', 0, 'Delete', '10000', '02/11/2022', '10000', '02/11/2022'),
-(30002, 'PRODUCT TYPE NAME 22', 30000, 'InActive', '10000', '02/11/2022', '10000', '07/11/2022'),
-(30003, 'Cotton & Blends', 30003, 'Active', '10000', '07/11/2022', '', '');
+(30002, 'PRODUCT TYPE NAME 22', 30000, 'Delete', '10000', '02/11/2022', '10000', '07/11/2022'),
+(30003, 'Cotton & Blends', 30003, 'Active', '10000', '07/11/2022', '', ''),
+(30004, 'Midi Dresses', 30004, 'Active', '10000', '09/11/2022', '', ''),
+(30005, 'Maxi Dresses', 30004, 'Active', '10000', '09/11/2022', '', ''),
+(30006, 'Prom Dresses', 30004, 'Active', '10000', '09/11/2022', '', ''),
+(30007, 'Little Black Dresses', 30004, 'Active', '10000', '09/11/2022', '', ''),
+(30008, 'Mini Dresses', 30004, 'Active', '10000', '09/11/2022', '', ''),
+(30009, 'Man Dresses', 30005, 'Active', '10000', '09/11/2022', '', ''),
+(30010, 'Man Black Dresses', 30005, 'Active', '10000', '09/11/2022', '', ''),
+(30011, 'Man Mini Dresses', 30005, 'Active', '10000', '09/11/2022', '', ''),
+(30012, 'Children Dresses', 30006, 'Active', '10000', '09/11/2022', '', ''),
+(30013, 'Children Dresses', 30006, 'Active', '10000', '09/11/2022', '', ''),
+(30014, 'Mini Dresses', 30006, 'Active', '10000', '09/11/2022', '', ''),
+(30015, 'Bags', 30007, 'Active', '10000', '09/11/2022', '', ''),
+(30016, 'Purses', 30007, 'Active', '10000', '09/11/2022', '', '');
 
 -- --------------------------------------------------------
 
@@ -287,6 +343,15 @@ CREATE TABLE `shopingcard` (
   `UpdateDate` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `shopingcard`
+--
+
+INSERT INTO `shopingcard` (`ShopingCardID`, `ProductID`, `CustomerID`, `ProductCode`, `Quantity`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
+(110001, 110001, 525049, '110001', '1', 'P', '525049', '10/11/2022', '', ''),
+(110002, 110001, 525049, '110001', '1', 'P', '525049', '10/11/2022', '', ''),
+(110003, 110001, NULL, '110001', '1', 'P', NULL, '10/11/2022', '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -331,6 +396,12 @@ INSERT INTO `userinfo` (`UserID`, `LoginID`, `UserType`, `Password`, `FullName`,
 --
 ALTER TABLE `customerinfo`
   ADD PRIMARY KEY (`CustomerID`);
+
+--
+-- Indexes for table `menu_item`
+--
+ALTER TABLE `menu_item`
+  ADD PRIMARY KEY (`menu_item_id`);
 
 --
 -- Indexes for table `orderinfo`
@@ -400,7 +471,13 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `customerinfo`
 --
 ALTER TABLE `customerinfo`
-  MODIFY `CustomerID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20000;
+  MODIFY `CustomerID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20002;
+
+--
+-- AUTO_INCREMENT for table `menu_item`
+--
+ALTER TABLE `menu_item`
+  MODIFY `menu_item_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orderinfo`
@@ -412,7 +489,7 @@ ALTER TABLE `orderinfo`
 -- AUTO_INCREMENT for table `productcategory`
 --
 ALTER TABLE `productcategory`
-  MODIFY `ProductCategoryId` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30004;
+  MODIFY `ProductCategoryId` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30010;
 
 --
 -- AUTO_INCREMENT for table `productcolor`
@@ -442,7 +519,7 @@ ALTER TABLE `productstock`
 -- AUTO_INCREMENT for table `productsubcategory`
 --
 ALTER TABLE `productsubcategory`
-  MODIFY `ProductSubCategoryId` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30004;
+  MODIFY `ProductSubCategoryId` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30017;
 
 --
 -- AUTO_INCREMENT for table `producttype`
@@ -454,7 +531,7 @@ ALTER TABLE `producttype`
 -- AUTO_INCREMENT for table `shopingcard`
 --
 ALTER TABLE `shopingcard`
-  MODIFY `ShopingCardID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110000;
+  MODIFY `ShopingCardID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110004;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
