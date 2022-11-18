@@ -14,6 +14,7 @@
                         <div class="header-cart-menu d-flex align-items-center ml-auto">
                             <!-- Cart Area -->
                             <div class="cart">
+                                <a href="#" id="header-cart-btn" target="_blank"><i class="fa-user"></i></a>
                                 <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">2</span> <i class="ti-bag"></i> Your Bag $20</a>
                                 <!-- Cart List Area Start -->
                                 <ul class="cart-list">

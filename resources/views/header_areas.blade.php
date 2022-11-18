@@ -38,11 +38,15 @@
                                         <a href="cart.html" class="btn btn-sm btn-cart">Cart</a>
                                         <a href="checkout-1.html" class="btn btn-sm btn-checkout">Checkout</a>
                                     </li>
+
+                                    
                                 </ul>
                             </div>
+                            
                             <div class="header-right-side-menu ml-15">
                                 <a href="#" id="sideMenuBtn"><i class="ti-menu" aria-hidden="true"></i></a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -90,8 +94,30 @@
                                             </a>
                                     </li>
                                     @endforeach
+                                    @php
+                                    $LoginID = Session::get('Customer_LoginID');
+                                    @endphp
+                                    @if($LoginID)
+
+                                    <li class="dropdown">
+
+                                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
+                                                                Welcome, User <b class="caret"></b>
+                                                            </a>
+                                
+                                        <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <!-- ADDED CLASS -->
+                                        <a class="dropdown-item" href="#">Profile</a>
+                                        <a class="dropdown-item" href="#">Orders</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Logout</a>
+                                        </div>
+                                
+                                    </li>
+                                    @endif
                                 </ul>
                             </div>
+                            
                         </nav>
                     </div>
                     <!-- Help Line -->

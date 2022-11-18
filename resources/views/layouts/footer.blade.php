@@ -32,6 +32,8 @@
 
 
 <script>
+
+
   function checkData(){
       if($('#Primary1').is(":checked") && $('#Primary2').is(":checked") ){
         swal({
@@ -50,29 +52,32 @@
             timer: '1500'
         });
       }
-    }
+  }
 
   function addUserType() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
       url = "{{ url('CustomerInfo') }}";
       $.ajax({
           url: url,
           type: "POST",
-          data: new FormData($(".userInfoDataAdd form")[0]),
+          data: new FormData($(".CustomerSignUp form")[0]),
           contentType: false,
           processData: false,
           success: function (data) {
               console.log(data);
               var dataResult = JSON.parse(data);
               if (dataResult.statusCode == 200) {
-                  $('.userInfoDataAdd').modal('hide');
-                  $('#userInfo-dataTabel').DataTable().ajax.reload();
-                  swal("Success", dataResult.statusMsg);
-                  $('.userInfoDataAdd form')[0].reset();
+                  $('.CustomerSignUp form')[0].reset();
+                  $('.CustomerSignUp').modal('hide');
+                  swal("Success", "Welcome To Bondona");
               } else if (dataResult.statusCode == 201) {
                   swal({
                       title: "Oops",
                       text: dataResult.statusMsg,
-                      icon: "error",
                       timer: '1500'
                   });
               }
@@ -81,7 +86,6 @@
               swal({
                   title: "Oops",
                   text: "Error occured",
-                  icon: "error",
                   timer: '1500'
               });
           }

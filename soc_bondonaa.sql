@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 01:19 PM
+-- Generation Time: Nov 17, 2022 at 09:06 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -49,8 +49,7 @@ CREATE TABLE `customerinfo` (
 --
 
 INSERT INTO `customerinfo` (`CustomerID`, `LoginID`, `Password`, `FirstName`, `LastName`, `picture`, `MobileNo`, `Email`, `Address`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
-(20000, '0147852369', '123456', 'Abir', 'Dhali', 'No Image', '0147852369', '1vv@gmail.com', 'Dhali6876,nnn', 'Delete', '10000', '14/11/2022', '', ''),
-(20001, '0147410147', 'e10adc3949ba59abbe56e057f20f883e', 'Dhali', 'Abir', 'public/allImages/CustomerImage/BwEufb.jpg', '0147410147', 'dhali6876@gmail.com', 'Dhaka,Bnagladehs', 'Active', '10000', '14/11/2022', '', '');
+(20013, '01684924439', 'e10adc3949ba59abbe56e057f20f883e', 'Dhali', 'Abir', 'public/allImages/CustomerImage/nMKXTS.jpg', '01684924439', 'dhaliabir@gmail.com', 'Dhaka,bangladesh', 'Active', '01684924439', '17/11/2022', '', '');
 
 -- --------------------------------------------------------
 
@@ -350,7 +349,12 @@ CREATE TABLE `shopingcard` (
 INSERT INTO `shopingcard` (`ShopingCardID`, `ProductID`, `CustomerID`, `ProductCode`, `Quantity`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
 (110001, 110001, 525049, '110001', '1', 'P', '525049', '10/11/2022', '', ''),
 (110002, 110001, 525049, '110001', '1', 'P', '525049', '10/11/2022', '', ''),
-(110003, 110001, NULL, '110001', '1', 'P', NULL, '10/11/2022', '', '');
+(110003, 110001, NULL, '110001', '1', 'P', NULL, '10/11/2022', '', ''),
+(110004, 110005, 20013, '110005', '1', 'P', '20013', '17/11/2022', '', ''),
+(110005, 110004, 20013, '110004', '1', 'P', '20013', '17/11/2022', '', ''),
+(110006, 110005, 20013, '110005', '1', 'P', '20013', '17/11/2022', '', ''),
+(110007, 110005, 20013, '110005', '1', 'P', '20013', '17/11/2022', '', ''),
+(110008, 110005, 20013, '110005', '1', 'P', '20013', '17/11/2022', '', '');
 
 -- --------------------------------------------------------
 
@@ -471,7 +475,7 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `customerinfo`
 --
 ALTER TABLE `customerinfo`
-  MODIFY `CustomerID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20002;
+  MODIFY `CustomerID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20014;
 
 --
 -- AUTO_INCREMENT for table `menu_item`
@@ -531,7 +535,7 @@ ALTER TABLE `producttype`
 -- AUTO_INCREMENT for table `shopingcard`
 --
 ALTER TABLE `shopingcard`
-  MODIFY `ShopingCardID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110004;
+  MODIFY `ShopingCardID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110009;
 
 --
 -- AUTO_INCREMENT for table `userinfo`

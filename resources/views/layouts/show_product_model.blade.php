@@ -136,7 +136,7 @@
 </div>
 
 
-<div class="modal fade" id="CustomerSignUp" tabindex="-1" role="dialog" aria-labelledby="CustomerLogin" aria-hidden="true">
+<div class="modal fade CustomerSignUp" id="CustomerSignUp" tabindex="-1" role="dialog" aria-labelledby="CustomerLogin" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
         </button>
@@ -157,6 +157,7 @@
                                 <hr>
                                 <form  action="#" method="post" enctype="multipart/form-data">
                                     {{csrf_field()}}
+                                    <input type="hidden" name="ViewType" id="ViewType"/>
                                     <div class="row g-1">
                                         <div class="col mb-0">
                                           <input type="hidden" id="UserID" name="UserID"/>

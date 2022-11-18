@@ -35,20 +35,27 @@ class CustomerInfoController extends Controller
             if ($request['CustomerID']==""){
                 $data = array();
                 if($request['Primary1']=="1"){
-                    $data['LoginID'] = $request['MobileNo'];
+                    $LoginID = $request['MobileNo'];
                 }elseif($request['Primary2']=="1"){
-                    $data['LoginID'] = $request['Email'];
+                    $LoginID = $request['Email'];
                 }else{
-                    $data['LoginID'] = "NO AA";
+                    $LoginID = "NO AA";
                 }
+                
+                $data['LoginID'] = $LoginID;
                 $data['Password'] = md5($request['Password']);
                 $data['FirstName'] = $request['FirstName'];
                 $data['LastName'] = $request['LastName'];
                 $data['MobileNo'] = $request['MobileNo'];
                 $data['Email'] = $request['Email'];
                 $data['Address'] = $request['Address'];
-                $data['Status'] = $request['Status'];
-                $data['CreateBy'] = Session::get('Admin_UserID');
+                if($request['ViewType']=="Admin"){
+                    $data['CreateBy'] = Session::get('Admin_UserID');
+                    $data['Status'] = $request['Status'];
+                }else{
+                    $data['CreateBy'] = $LoginID;
+                    $data['Status'] = "Active";
+                }
                 $data['CreateDate'] = $this->getDates();
                 $data['UpdateBy'] = "";
                 $data['UpdateDate'] = "";
@@ -67,12 +74,57 @@ class CustomerInfoController extends Controller
                 }
 
                 $result = DB::table('customerinfo')->insert($data);
-                return json_encode(array(
-                    "statusCode" => 200,
-                    "statusMsg" => "Customer Added Successfully"
-                ));
+                
+                if($request['ViewType']=="Admin"){
+                    return json_encode(array(
+                        "statusCode" => 200,
+                        "statusMsg" => "Customer Added Successfully"
+                    ));
+                }else{
+                    /* return json_encode(array(
+                        "statusCode" => 200,
+                        "statusMsg" => "Customer Added Successfully"
+                    )); */
+                    //$this->customerCheckUP($LoginID,$request['Password']);
+                    $userName = $LoginID;
+                    $userPassword =md5($request['Password']);
 
-            }else{
+                    $UserInfo = DB::select("SELECT CustomerID,LoginID,Password,FirstName,LastName,picture,
+                                        MobileNo, Address,Email,Status
+                                        FROM customerinfo
+                                        WHERE LoginID = '$userName'
+                                        AND Password = '$userPassword'
+                                        AND Status = 'Active'");
+
+                    if ($UserInfo) {
+                        Session::put('CustomerID', $UserInfo[0]->CustomerID);
+                        Session::put('Customer_LoginID', $UserInfo[0]->LoginID);
+                        Session::put('Customer_FirstName', $UserInfo[0]->FirstName);
+                        Session::put('Customer_LastName', $UserInfo[0]->LastName);
+                        Session::put('Customer_picture', $UserInfo[0]->picture);
+                        Session::put('Customer_Email', $UserInfo[0]->Email);
+                        Session::put('Customer_MobileNo', $UserInfo[0]->MobileNo);
+                        Session::put('Customer_Address', $UserInfo[0]->Address);
+                        Session::put('Customer_Status', $UserInfo[0]->Status);
+
+                        return json_encode(array(
+                            "statusCode" => 200
+                        ));
+
+                    } else {
+                        return json_encode(array(
+                            "statusCode" => 201,
+                            "RealPass" => $request['idpassword'],
+                            "EncPass" => $userPassword,
+                            "sss" => json_encode($UserType)
+                        ));
+                    }
+
+                }
+
+            }
+            
+            else{
 
                 $data = array();
                 $data['LoginID'] = $request['LoginID'];
@@ -180,6 +232,97 @@ class CustomerInfoController extends Controller
             }
         } catch (\Exception $e) {
             return view('errorpage.database_error');
+        }
+    }
+
+
+    public function customerLogin(Request $request){
+        try {
+            $userName = $request['LoginID'];
+            $userPassword =$request['Password'];
+
+            $UserInfo = DB::select("SELECT CustomerID,LoginID,Password,FirstName,LastName,picture,
+                                MobileNo, Address,Email,Status
+                                FROM customerinfo
+                                WHERE LoginID = '$userName'
+                                AND Password = '$userPassword'
+                                AND Status = 'Active'");
+
+            if ($UserInfo) {
+                Session::put('CustomerID', $UserInfo[0]->CustomerID);
+                Session::put('Customer_LoginID', $UserInfo[0]->LoginID);
+                Session::put('Customer_FirstName', $UserInfo[0]->FirstName);
+                Session::put('Customer_LastName', $UserInfo[0]->LastName);
+                Session::put('Customer_picture', $UserInfo[0]->picture);
+                Session::put('Customer_Email', $UserInfo[0]->Email);
+                Session::put('Customer_MobileNo', $UserInfo[0]->MobileNo);
+                Session::put('Customer_Address', $UserInfo[0]->Address);
+                Session::put('Customer_Status', $UserInfo[0]->Status);
+
+                return json_encode(array(
+                    "statusCode" => 200
+                ));
+
+            } else {
+                return json_encode(array(
+                    "statusCode" => 201,
+                    "RealPass" => $request['idpassword'],
+                    "EncPass" => $userPassword,
+                    "sss" => json_encode($UserType)
+                ));
+            }
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return json_encode(array(
+                "statusCode" => 201,
+                "statusMsg" => $e->getMessage()
+            ));
+        }
+    }
+
+    public function customerCheckUP($userName,$userPassword){
+        try {
+            $userName = $userName;
+            $userPassword =md5($userPassword);
+
+            $UserInfo = DB::select("SELECT CustomerID,LoginID,Password,FirstName,LastName,picture,
+                                MobileNo, Address,Email,Status
+                                FROM customerinfo
+                                WHERE LoginID = '$userName'
+                                AND Password = '$userPassword'
+                                AND Status = 'Active'");
+
+            if ($UserInfo) {
+                Session::put('CustomerID', $UserInfo[0]->CustomerID);
+                Session::put('Customer_LoginID', $UserInfo[0]->LoginID);
+                Session::put('Customer_FirstName', $UserInfo[0]->FirstName);
+                Session::put('Customer_LastName', $UserInfo[0]->LastName);
+                Session::put('Customer_picture', $UserInfo[0]->picture);
+                Session::put('Customer_Email', $UserInfo[0]->Email);
+                Session::put('Customer_MobileNo', $UserInfo[0]->MobileNo);
+                Session::put('Customer_Address', $UserInfo[0]->Address);
+                Session::put('Customer_Status', $UserInfo[0]->Status);
+
+                return json_encode(array(
+                    "statusCode" => 200
+                ));
+
+            } else {
+                return json_encode(array(
+                    "statusCode" => 201,
+                    "RealPass" => $request['idpassword'],
+                    "EncPass" => $userPassword,
+                    "sss" => json_encode($UserType)
+                ));
+            }
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return json_encode(array(
+                "statusCode" => 201,
+                "statusMsg" => $e->getMessage()
+            ));
         }
     }
 

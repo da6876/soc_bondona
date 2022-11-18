@@ -140,14 +140,14 @@
                                 <form class="cart clearfix mb-50 d-flex " enctype="multipart/form-data">
                                     <div class="quantity">
                                         {{csrf_field()}}
-                                        <input type="hidden" name="CustomerID" id="CustomerID" />
+                                        <input type="hidden" name="CustomerID" id="CustomerID" value="{{Session::get('CustomerID')}}"/>
                                         <input type="hidden" name="ProductID" id="ProductID" value="{{$ProductID}}"/>
                                         <input type="hidden" name="ProductCode" id="ProductCode" value="{{$ProductID}}"/>
                                         <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
                                         <input type="number" class="qty-text" id="Quantity" step="1" min="1" max="12" name="Quantity" value="1">
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     </div>
-                                    <button type="button" onclick="showalert()" name="addtocart" value="5" class="btn cart-submit d-block">Add to cart</button>
+                                    <button type="button" onclick="showalert('{{$ProductID}}','{{Session::get('CustomerID')}}')" name="addtocart" value="5" class="btn cart-submit d-block">Add to cart</button>
                                 </form>
                             </div>
                             <div id="accordion" role="tablist">
@@ -275,15 +275,36 @@
     @include('layouts.footer')
     <script>
 
-        function showalert(){
-            $('#showAlertForLogin').modal('show');
+        function showalert(ProductId,CustomerId){
+            if(CustomerId==""){
+                $('#showAlertForLogin').modal('show');
+            }else{
+                if(CustomerID!=""){
+                    url = "{{ url('AddToCart') }}";
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: new FormData($(".addToCard form")[0]),
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            console.log(data);                
+                        }, error: function (data) {
+                            console.log(data);
+                            
+                        }
+                    });
+                }else{
+                    alert("Success !!"+CustomerID );
+                }
+            }
         }
 
         function addToCart() {
             var CustomerID  = $("#CustomerID").val();
             if(CustomerID!=""){
 
-                /* url = "{{ url('AddToCart') }}";
+                url = "{{ url('AddToCart') }}";
                 $.ajax({
                     url: url,
                     type: "POST",
@@ -291,18 +312,25 @@
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        console.log(data);                
+                        console.log(data);  
+                        alert(data.statusMsg);
+                        swal({
+                            title: "Success",
+                            text: data.statusMsg,
+                            timer: '1500'
+                        });              
                     }, error: function (data) {
-                        console.log(data);
+                        console.log(data); 
+                        
+                        swal({
+                            title: "Success",
+                            text: data.statusMsg,
+                            timer: '1500'
+                        });   
                         
                     }
-                }); */
-                /* swal({
-                    text: "Please Login! Then Add To Product !!",
-                    icon: "error",
-                    timer: '3000'
-                }); */
-
+                });
+                
 
                 alert("Success !!"+CustomerID );
                 
