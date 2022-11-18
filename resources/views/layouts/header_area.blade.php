@@ -1,6 +1,6 @@
 <header class="header_area">
     <!-- Top Header Area Start -->
-    <div class="top_header_area">
+    <div class="top_header_area" id="myElement">
         <div class="container h-100">
             <div class="row h-100 align-items-center justify-content-end">
 
@@ -14,12 +14,11 @@
                         <div class="header-cart-menu d-flex align-items-center ml-auto">
                             <!-- Cart Area -->
                             <div class="cart">
-                                <a href="#" id="header-cart-btn" target="_blank"><i class="fa-user"></i></a>
                                 <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">2</span> <i class="ti-bag"></i> Your Bag $20</a>
                                 <!-- Cart List Area Start -->
                                 <ul class="cart-list">
                                     <li>
-                                        <a href="#" class="image"><img src="public/home/img/product-img/product-10.jpg" class="cart-thumb" alt=""></a>
+                                        <a href="#" class="image"><img src="../public/home/img/product-img/product-10.jpg" class="cart-thumb" alt=""></a>
                                         <div class="cart-item-desc">
                                             <h6><a href="#">Women's Fashion</a></h6>
                                             <p>1x - <span class="price">$10</span></p>
@@ -27,7 +26,7 @@
                                         <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
                                     </li>
                                     <li>
-                                        <a href="#" class="image"><img src="public/home/img/product-img/product-11.jpg" class="cart-thumb" alt=""></a>
+                                        <a href="#" class="image"><img src="../public/home/img/product-img/product-11.jpg" class="cart-thumb" alt=""></a>
                                         <div class="cart-item-desc">
                                             <h6><a href="#">Women's Fashion</a></h6>
                                             <p>1x - <span class="price">$10</span></p>
@@ -39,11 +38,15 @@
                                         <a href="cart.html" class="btn btn-sm btn-cart">Cart</a>
                                         <a href="checkout-1.html" class="btn btn-sm btn-checkout">Checkout</a>
                                     </li>
+
+
                                 </ul>
                             </div>
+
                             <div class="header-right-side-menu ml-15">
                                 <a href="#" id="sideMenuBtn"><i class="ti-menu" aria-hidden="true"></i></a>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -72,22 +75,56 @@
 
                             <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
                                 <ul class="navbar-nav animated" id="nav">
-                                    
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                        <div class="dropdown-menu" aria-labelledby="karlDropdown">
-                                            <a class="dropdown-item" href="{{url('/')}}">Homes</a>
-                                            <a class="dropdown-item" href="{{url('shop')}}">Shop</a>
-                                            <a class="dropdown-item" href="{{url('product_view')}}">Product Details</a>
-                                            <a class="dropdown-item" href="{{url('cart')}}">Cart</a>
-                                            <a class="dropdown-item" href="{{url('checkout')}}">Checkout</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Dresses</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"><span class="karl-level">hot</span> Shoes</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                                    @php
+                                        $MenuItem = DB::select("SELECT Name, Link,Other
+                                        FROM menu_item
+                                        WHERE Status = 'Active'");
+                                    @endphp
+
+                                    @foreach($MenuItem as $MenuItem)
+                                        @php
+                                            $linkName = $MenuItem->Link;
+                                        @endphp
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="{{url($linkName)}}">
+                                                @if($MenuItem->Other=="Hot")
+                                                    <span class="karl-level">New</span>
+                                                @endif
+                                                {{$MenuItem->Name}}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                    @php
+                                        $LoginID = Session::get('Customer_LoginID');
+                                    @endphp
+                                    @if($LoginID)
+
+                                        <li class="dropdown">
+
+                                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                                Welcome, User <b class="caret"></b>
+                                            </a>
+
+                                            <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <!-- ADDED CLASS -->
+                                                <a class="dropdown-item" href="#">Profile</a>
+                                                <a class="dropdown-item" href="#">Orders</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="{{url('LogoutCus')}}">Logout</a>
+                                            </div>
+
+                                        </li>
+                                    @else
+
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="#" onclick="forShowAlertCustomerSignUp()">
+                                                Login Or SignUp
+                                            </a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
+
                         </nav>
                     </div>
                     <!-- Help Line -->
@@ -99,5 +136,5 @@
         </div>
     </div>
 
-    
+
 </header>

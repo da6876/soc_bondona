@@ -273,110 +273,19 @@
     <!-- /.wrapper end -->
     
     @include('layouts.footer')
-    <script>
 
-        function showalert(ProductId,CustomerId){
-            if(CustomerId==""){
-                $('#showAlertForLogin').modal('show');
-            }else{
-                if(CustomerID!=""){
-                    url = "{{ url('AddToCart') }}";
-                    $.ajax({
-                        url: url,
-                        type: "POST",
-                        data: new FormData($(".addToCard form")[0]),
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-                            console.log(data);                
-                        }, error: function (data) {
-                            console.log(data);
-                            
-                        }
-                    });
-                }else{
-                    alert("Success !!"+CustomerID );
-                }
-            }
-        }
-
-        function addToCart() {
-            var CustomerID  = $("#CustomerID").val();
-            if(CustomerID!=""){
-
-                url = "{{ url('AddToCart') }}";
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: new FormData($(".addToCard form")[0]),
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        console.log(data);  
-                        alert(data.statusMsg);
-                        swal({
-                            title: "Success",
-                            text: data.statusMsg,
-                            timer: '1500'
-                        });              
-                    }, error: function (data) {
-                        console.log(data); 
-                        
-                        swal({
-                            title: "Success",
-                            text: data.statusMsg,
-                            timer: '1500'
-                        });   
-                        
-                    }
-                });
-                
-
-                alert("Success !!"+CustomerID );
-                
-            }else{
-                var url = "{{ url('/') }}";
-                swal("For Add To Card, Please Login or SingUp !!", 
-                {
-                    buttons: {
-                        cancel: "SignUp",
-                        catch: "Login",
-                        defeat: "Continew",
-                    },}).then((value) => {
-                        switch (value) {
-                            case "cancel":
-                                signHere();
-                                break;
-                            case "catch":
-                                loginHere();
-                                break;
-                            default:
-                                swal("Continew As Gest !");
-                        }
-                    }
-                );
-            }
-            
-            
-        };
-
-        function showProductModel(Description,price,PriceDiscount,Details,Image) {
-            $('#quickview').modal('show');
-            $(".price").text('৳ '+price);
-            $(".discount").text('৳ '+PriceDiscount);
-            $('.title').text(Description);
-            $('.details').text(Details);
-            document.getElementById("pro_img").src = "../"+Image;
-            $('#Status').val(data[0].Status);
-        }
-        
-        function showDetailsProduct(ID) {
-             var url = "{{ url('product_views') }}" + '/' + ID;
-            window.location.href = url;
-        }
-
-
-    </script>
 </body>
+
+<script>
+    function showProductModel(Description,price,PriceDiscount,Details,Image) {
+        $('#quickview').modal('show');
+        $(".price").text('৳ '+price);
+        $(".discount").text('৳ '+PriceDiscount);
+        $('.title').text(Description);
+        $('.details').text(Details);
+        document.getElementById("pro_img").src = "../"+Image;
+        $('#Status').val(data[0].Status);
+    }
+</script>
 
 </html>

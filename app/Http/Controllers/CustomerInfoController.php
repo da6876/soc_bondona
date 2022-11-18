@@ -326,6 +326,12 @@ class CustomerInfoController extends Controller
         }
     }
 
+    public function usersLogOut(){
+        Session::flush();
+        return Redirect::to('/');
+    }
+
+
     public function getDates(){
         $Date = "";
         date_default_timezone_set("Asia/Dhaka");

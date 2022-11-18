@@ -24,6 +24,9 @@ Route::get('/', function () {
 Route::get('/nav', function () {
     return view('nav');
 });
+Route::get('/homes', function () {
+    return view('homes');
+});
 Route::get('/product_view', function () {
     return view('product_view');
 });
@@ -40,6 +43,7 @@ Route::get('/cart', function () {
     return view('cart');
 });
 Route::post('AddToCart','ProductInfoControler@addToCart');
+Route::get('LogoutCus','CustomerInfoController@usersLogOut');
 
 /*
 |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <header class="header_area">
     <!-- Top Header Area Start -->
-    <div class="top_header_area">
+    <div class="top_header_area" id="myElement">
         <div class="container h-100">
             <div class="row h-100 align-items-center justify-content-end">
 
@@ -110,10 +110,17 @@
                                         <a class="dropdown-item" href="#">Profile</a>
                                         <a class="dropdown-item" href="#">Orders</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Logout</a>
+                                        <a class="dropdown-item" href="{{url('LogoutCus')}}">Logout</a>
                                         </div>
                                 
                                     </li>
+                                        @else
+
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="#">
+                                                Login Or SignUp
+                                            </a>
+                                        </li>
                                     @endif
                                 </ul>
                             </div>

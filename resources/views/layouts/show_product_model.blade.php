@@ -136,7 +136,8 @@
 </div>
 
 
-<div class="modal fade CustomerSignUp" id="CustomerSignUp" tabindex="-1" role="dialog" aria-labelledby="CustomerLogin" aria-hidden="true">
+<div class="modal fade CustomerSignUp" tabindex="-1" role="dialog" aria-labelledby="CustomerLogin" aria-hidden="true">
+
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
         </button>
@@ -144,78 +145,72 @@
             <div class="modal-body">
                 <div class="quickview_body">
                     <div class="container">
-                        
-                            
-                            <!-- Pills content -->
-                            <div class="tab-content" id="CustomerInfoDataAdd">
-                                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                                
-                                        
-                                <div class="top_logo text-center">
-                                    <a href="#"><img src="../public/home/img/core-img/bondonalogo.png" alt=""></a>
-                                </div>
-                                <hr>
-                                <form  action="#" method="post" enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="ViewType" id="ViewType"/>
-                                    <div class="row g-1">
-                                        <div class="col mb-0">
-                                          <input type="hidden" id="UserID" name="UserID"/>
-                                          <label for="FirstName" class="form-label">First Name</label>
-                                          <input type="text" id="FirstName" name="FirstName" class="form-control" placeholder="xxxx@xxx.xx" />
-                                        </div>
-                                        <div class="col mb-0">
-                                          <label for="LastName" class="form-label">Last Name</label>
-                                          <input type="text" id="LastName" name="LastName" class="form-control" placeholder="xxxx@xxx.xx" />
-                                        </div>
-                                    </div>
-                                    <div class="row g-2">
-                                        <div class="col mb-6">
-                                          <label for="MobileNo" class="form-label">Mobile No</label>
-                                          <input type="text" id="MobileNo" name="MobileNo" class="form-control" placeholder="xxxx@xxx.xx" />
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="Primary1" name="Primary1">
-                                            <label class="form-check-label" for="Primary1">
-                                              Set As Primary ID
-                                            </label>
-                                          </div>
-                                        </div>
-                                        <div class="col mb-6">
-                                          <label for="Email" class="form-label">Email</label>
-                                          <input type="email" id="Email" name="Email" class="form-control" placeholder="xxxx@xxx.xx" />
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="Primary2" name="Primary2">
-                                            <label class="form-check-label" for="Primary2">
-                                              Set As Primary ID
-                                            </label>
-                                          </div>
-                                        </div>
-                                    </div>
-                                    <div class="row g-1">
-                                        <div class="col mb-12">
-                                          <label for="Address" class="form-label">Address</label>
-                                          <input type="text" id="Address" class="form-control" placeholder="xxxx@xxx.xx" name="Address" />
-                                        </div>
-                                    </div>
-                                    <div class="row g-1">
-                                        <div class="col mb-0">
-                                          <label for="picture" class="form-label">Picture</label>
-                                          <input type="file" id="picture" class="form-control" name="picture" />
-                                        </div>
-                                        <div class="col mb-0">
-                                            <label for="Password" class="form-label">Password</label>
-                                            <input type="password" id="Password" class="form-control" placeholder="xxxx@xxx.xx" name="Password" />
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <button type="button" onclick="checkData()" class="btn btn-primary btn-block mb-4">Sign in</button>
-                                    <div class="text-center">
-                                        <p>Already a Member? <a href="#!">LogIn</a></p>
-                                    </div>
-                                </form>
-                                </div>
+                        <div class="tab-content" id="CustomerInfoDataAdd">
+                            <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                            <div class="top_logo text-center">
+                                <a href="#"><img src="../public/home/img/core-img/bondonalogo.png" alt=""></a>
                             </div>
-                            <!-- Pills content -->
+                            <hr>
+                            <form  action="#" method="post" enctype="multipart/form-data">
+                                {{csrf_field()}}
+                                <input type="hidden" name="ViewType" id="ViewType"/>
+                                <div class="row g-1">
+                                    <div class="col mb-0">
+                                      <input type="hidden" id="UserID" name="UserID"/>
+                                      <label for="FirstName" class="form-label">First Name</label>
+                                      <input type="text" id="FirstName" name="FirstName" class="form-control" placeholder="xxxx@xxx.xx" />
+                                    </div>
+                                    <div class="col mb-0">
+                                      <label for="LastName" class="form-label">Last Name</label>
+                                      <input type="text" id="LastName" name="LastName" class="form-control" placeholder="xxxx@xxx.xx" />
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col mb-6">
+                                      <label for="MobileNo" class="form-label">Mobile No</label>
+                                      <input type="text" id="MobileNo" name="MobileNo" class="form-control" placeholder="xxxx@xxx.xx" />
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" id="Primary1" name="Primary1">
+                                        <label class="form-check-label" for="Primary1">
+                                          Set As Primary ID
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div class="col mb-6">
+                                      <label for="Email" class="form-label">Email</label>
+                                      <input type="email" id="Email" name="Email" class="form-control" placeholder="xxxx@xxx.xx" />
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" id="Primary2" name="Primary2">
+                                        <label class="form-check-label" for="Primary2">
+                                          Set As Primary ID
+                                        </label>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="row g-1">
+                                    <div class="col mb-12">
+                                      <label for="Address" class="form-label">Address</label>
+                                      <input type="text" id="Address" class="form-control" placeholder="xxxx@xxx.xx" name="Address" />
+                                    </div>
+                                </div>
+                                <div class="row g-1">
+                                    <div class="col mb-0">
+                                      <label for="picture" class="form-label">Picture</label>
+                                      <input type="file" id="picture" class="form-control" name="picture" />
+                                    </div>
+                                    <div class="col mb-0">
+                                        <label for="Password" class="form-label">Password</label>
+                                        <input type="password" id="Password" class="form-control" placeholder="xxxx@xxx.xx" name="Password" />
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="button" onclick="checkData()" class="btn btn-primary btn-block mb-4">Sign in</button>
+                                <div class="text-center">
+                                    <p>Already a Member? <a href="#!">LogIn</a></p>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -223,28 +218,128 @@
     </div>
 </div>
 
-<div class="modal" id="showAlertForLogin" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Sorry !!</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="top_logo">
-                <a href="#"><img src="../public/home/img/core-img/bondonalogo.png" alt=""></a>
+
+<div class="modal fade bd-example-modal-lg" id="CustomerSignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+
+        <div class="modal-content">
+            <div class="container">
+                    <div class="col-md mb-md-0 mb-5">
+                        <div class="modal-body p-0">
+                            <div class="col-12 col-md-12">
+
+                                <div class="checkout_details_area mt-50 clearfix">
+
+                                    <div class="cart-page-heading">
+                                        <h3 class="mb-4">Sign UP</h3>
+                                        <p>Enter your Information Here</p>
+                                    </div>
+
+                                    <form action="#" method="post">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="first_name">First Name <span>*</span></label>
+                                                <input type="text" class="form-control" id="first_name" value="" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="last_name">Last Name <span>*</span></label>
+                                                <input type="text" class="form-control" id="last_name" value="" required>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label for="street_address">Address <span>*</span></label>
+                                                <input type="text" class="form-control mb-3" id="street_address" value="">
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label for="phone_number">Phone No <span>*</span></label>
+                                                <input type="number" class="form-control" id="phone_number" min="0" value="">
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <label for="email_address">Email Address <span>*</span></label>
+                                                <input type="email" class="form-control" id="email_address" value="">
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="custom-control custom-checkbox d-block mb-2">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                    <label class="custom-control-label" for="customCheck1">Terms and conitions</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox d-block mb-2">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                    <label class="custom-control-label" for="customCheck2">Create an accout</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 mb-4">
+                                                <a href="#" class="btn karl-checkout-btn">Create Account</a>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          <h5>Please Login Here. Or Sign Up</h5>
+
         </div>
-        <div class="modal-footer">
-          <button type="button" onclick="signHere()" class="btn btn-primary">Sign Up</button>
-          <button type="button" onclick="loginHere()" class="btn btn-info">Login</button>
-        </div>
-      </div>
+
     </div>
-  </div>
+</div>
+
+<div class="modal fade" id="CustomerSignIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal-content">
+            <div class="container">
+                    <div class="col-md mb-md-0 mb-5">
+                        <div class="modal-body p-0">
+                            <div class="checkout_details_area mt-50 clearfix">
+
+                                    <div class="cart-page-heading">
+                                        <h3 class="mb-4">LogIn Here</h3>
+                                        <p>Enter your Information Here</p>
+                                    </div>
+
+                                    <form action="#" method="post">
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <label for="phone_number">Phone/Email <span>*</span></label>
+                                                <input type="number" class="form-control" id="phone_number" min="0" value="">
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label for="phone_number">Password <span>*</span></label>
+                                                <input type="password" class="form-control" id="phone_number" min="0" value="">
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="custom-control custom-checkbox d-block mb-2">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                    <label class="custom-control-label" for="customCheck2">Remember Me</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 mb-4">
+                                                <a href="#" class="btn karl-checkout-btn">Login</a>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 
 
   <script>

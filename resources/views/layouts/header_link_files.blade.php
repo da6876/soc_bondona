@@ -7,6 +7,8 @@
 
 <!-- Responsive CSS -->
 <link href="{{asset('public/home/css/responsive.css')}}" rel="stylesheet">
+
+
 <style>
 .sticky {
 position: fixed;
