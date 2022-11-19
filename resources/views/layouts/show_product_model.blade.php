@@ -26,19 +26,20 @@
                                     </div>
                                     <h5 class="price">$120.99 <span class="discount">$130</span></h5>
                                     <p class="details">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia expedita quibusdam aspernatur, sapiente consectetur accusantium perspiciatis praesentium eligendi, in fugiat?</p>
-                                    <a href="#" onclick="showDetailsProduct()">View Full Product Details</a>
+                                    <a href="#" onclick="viewDetailsProduct()">View Full Product Details</a>
                                 </div>
                                 <!-- Add to Cart Form -->
                                 <form class="cart" method="post">
                                     <div class="quantity">
                                         <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
                                         <input type="hidden" id="product_id"/>
+                                        <input type="hidden" id="CustomerID" value="{{Session::get('CustomerID')}}"/>
                                         <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
 
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     </div>
 
-                                    <button type="submit" name="addtocart" value="5" class="cart-submit" onclick="showalert('POPUP','','{{Session::get('CustomerID')}}')">Add to cart</button>
+                                    <button type="button" name="addtocart" value="5" class="cart-submit" onclick="addToCart()">Add to cart</button>
                                     <!-- Wishlist -->
                                     <div class="modal_pro_wishlist">
                                         <a href="wishlist.html" target="_blank"><i class="ti-heart"></i></a>
@@ -67,7 +68,7 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" id="CustomerSignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg " id="CustomerSignUp"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 
         <div class="modal-content">
@@ -83,27 +84,32 @@
                                         <p>Enter your Information Here</p>
                                     </div>
 
-                                    <form action="#" method="post">
+                                    <form action="#" method="post" enctype="multipart/form-data">
+                                        {{csrf_field()}}
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
-                                                <label for="first_name">First Name <span>*</span></label>
-                                                <input type="text" class="form-control" id="first_name" value="" required>
+                                                <label for="first_name">Full Name <span>*</span></label>
+                                                <input type="text" class="form-control" id="FirstName" name="FirstName" value="" required>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label for="last_name">Last Name <span>*</span></label>
-                                                <input type="text" class="form-control" id="last_name" value="" required>
+                                                <label for="first_name">Password <span>*</span></label>
+                                                <input type="password" class="form-control" id="Password" name="Password" value="" required>
                                             </div>
-                                            <div class="col-12 mb-3">
-                                                <label for="street_address">Address <span>*</span></label>
-                                                <input type="text" class="form-control mb-3" id="street_address" value="">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="first_name">Phone No <span>*</span></label>
+                                                <input type="number" class="form-control" id="MobileNo" name="MobileNo" value="" required>
+                                                <div class="custom-control custom-checkbox d-block mb-2">
+                                                    <input type="checkbox" class="custom-control-input" value="1" id="Primary1" name="Primary1">
+                                                    <label class="custom-control-label" for="Primary1">Set As Primary Key For Login</label>
+                                                </div>
                                             </div>
-                                            <div class="col-12 mb-3">
-                                                <label for="phone_number">Phone No <span>*</span></label>
-                                                <input type="number" class="form-control" id="phone_number" min="0" value="">
-                                            </div>
-                                            <div class="col-12 mb-4">
-                                                <label for="email_address">Email Address <span>*</span></label>
-                                                <input type="email" class="form-control" id="email_address" value="">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="last_name">Email Address <span>*</span></label>
+                                                <input type="email" class="form-control" id="Email"  name="Email" value="" required>
+                                                <div class="custom-control custom-checkbox d-block mb-2">
+                                                    <input type="checkbox" class="custom-control-input"  value="1" id="Primary2" name="Primary2">
+                                                    <label class="custom-control-label" for="Primary2">Set As Primary Key For Login</label>
+                                                </div>
                                             </div>
 
                                             <div class="col-12">
@@ -118,7 +124,7 @@
                                             </div>
 
                                             <div class="col-12 mb-4">
-                                                <a href="#" class="btn karl-checkout-btn">Create Account</a>
+                                                <a href="#" onclick="checkData()" class="btn karl-checkout-btn">Create Account</a>
                                             </div>
 
                                             <div class="col-12 mb-4 text-center">
@@ -155,15 +161,16 @@
                                         <p>Enter your Information Here</p>
                                     </div>
 
-                                    <form action="#" method="post">
+                                    <form action="#" method="post" enctype="multipart/form-data">
+                                        {{csrf_field()}}
                                         <div class="row">
                                             <div class="col-12 mb-3">
                                                 <label for="phone_number">Phone/Email <span>*</span></label>
-                                                <input type="number" class="form-control" id="phone_number" min="0" value="">
+                                                <input type="text" class="form-control" id="LoginID" name="LoginID" min="0" value="">
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <label for="phone_number">Password <span>*</span></label>
-                                                <input type="password" class="form-control" id="phone_number" min="0" value="">
+                                                <input type="password" class="form-control" id="Password" name="Password" value="">
                                             </div>
 
                                             <div class="col-12">
@@ -174,7 +181,7 @@
                                             </div>
 
                                             <div class="col-12 mb-4">
-                                                <a href="#" class="btn karl-checkout-btn">Login</a>
+                                                <a href="#" onclick="customerLogin()" class="btn karl-checkout-btn">Login</a>
                                             </div>
 
                                             <div class="col-12 mb-4 text-center">
@@ -195,3 +202,8 @@
 
     </div>
 </div>
+
+
+<script>
+
+</script>

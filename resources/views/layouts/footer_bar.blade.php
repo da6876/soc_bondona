@@ -1,5 +1,5 @@
 
-        <footer class="footer_area">
+<footer class="footer_area">
             <div class="container">
                 <div class="row">
                     <!-- Single Footer Area Start -->

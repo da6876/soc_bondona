@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -64,7 +65,7 @@
                             <div class="single_gallery_item">
                                 <div class="product-img">
                                     <img src="{{$DisplayTypeSData->image1}}" height="100px" alt="{{$DisplayTypeSData->Description}}">
-                                    <div class="product-quicview">                                        
+                                    <div class="product-quicview">
                                         <a href="#" onclick="showProductModel('{{$DisplayTypeSData->ProductID}}','{{$DisplayTypeSData->Description}}','{{$DisplayTypeSData->PriceMRP}}',
                                             '{{$DisplayTypeSData->PriceDiscount}}','{{$DisplayTypeSData->Details}}','{{$DisplayTypeSData->image1}}')">
                                             <i class="ti-plus"></i>
@@ -76,7 +77,7 @@
                                     <p>{{$DisplayTypeSData->Description}}</p>
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="#"  onclick="showalert('{{$DisplayTypeSData->ProductID}}','{{Session::get('CustomerID')}}')" class="add-to-cart-btn">ADD TO CART</a>
+                                            <a href="#"  onclick="addProductToCart('{{$DisplayTypeSData->ProductID}}','{{Session::get('CustomerID')}}','1')" class="add-to-cart-btn">ADD TO CART</a>
                                         </div>
                                         <div class="col-6">
                                             <a href="#" onclick="showDetailsProduct('{{$DisplayTypeSData->ProductID}}')" class="view-to-product-btn">View Product</a>
@@ -122,7 +123,10 @@
                                 <div class="product-img">
                                     <img src="{{$TopDisplayType->image1}}" alt="">
                                     <div class="product-quicview">
-                                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
+                                        <a href="#" onclick="showProductModel('{{$TopDisplayType->ProductID}}','{{$TopDisplayType->Description}}','{{$TopDisplayType->PriceMRP}}',
+                                                '{{$TopDisplayType->PriceDiscount}}','{{$TopDisplayType->Details}}','{{$TopDisplayType->image1}}')">
+                                            <i class="ti-plus"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <!-- Product Description -->
@@ -132,7 +136,7 @@
                                     <!-- Add to Cart -->
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="#"  onclick="showalert('{{$TopDisplayType->ProductID}}','{{Session::get('CustomerID')}}')" class="add-to-cart-btn">ADD TO CART</a>
+                                            <a href="#"  onclick="addProductToCart('{{$TopDisplayType->ProductID}}','{{Session::get('CustomerID')}}','1')" class="add-to-cart-btn">ADD TO CART</a>
                                         </div>
                                         <div class="col-6">
                                             <a href="#" onclick="showDetailsProduct('{{$TopDisplayType->ProductID}}')" class="view-to-product-btn">View Product</a>
@@ -202,7 +206,12 @@
                                 <div class="product-img">
                                     <img src="{{$FeaturesDisplayType->image1}}" alt="">
                                     <div class="product-quicview">
-                                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
+                                        <div class="product-quicview">
+                                            <a href="#" onclick="showProductModel('{{$FeaturesDisplayType->ProductID}}','{{$FeaturesDisplayType->Description}}','{{$FeaturesDisplayType->PriceMRP}}',
+                                                    '{{$FeaturesDisplayType->PriceDiscount}}','{{$FeaturesDisplayType->Details}}','{{$FeaturesDisplayType->image1}}')">
+                                                <i class="ti-plus"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Product Description -->
@@ -212,7 +221,7 @@
                                     <!-- Add to Cart -->
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="#"  onclick="showalert('{{$TopDisplayType->ProductID}}','{{Session::get('CustomerID')}}')" class="add-to-cart-btn">ADD TO CART</a>
+                                            <a href="#"  onclick="addProductToCart('{{$FeaturesDisplayType->ProductID}}','{{Session::get('CustomerID')}}','1')" class="add-to-cart-btn">ADD TO CART</a>
                                         </div>
                                         <div class="col-6">
                                             <a href="#" onclick="showDetailsProduct('{{$FeaturesDisplayType->ProductID}}')" class="view-to-product-btn">View Product</a>

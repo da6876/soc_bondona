@@ -182,7 +182,7 @@
                                     <div class="product-img">
                                         <img src="{{$AllProducts->image1}}" alt="">
                                         <div class="product-quicview">
-                                            <a href="#" onclick="showProductModel('{{$AllProducts->Description}}','{{$AllProducts->PriceMRP}}','{{$AllProducts->PriceDiscount}}','{{$AllProducts->Details}}','{{$AllProducts->image1}}')"><i class="ti-plus"></i></a>
+                                            <a href="#" onclick="showProductModel('{{$AllProducts->ProductID}}','{{$AllProducts->Description}}','{{$AllProducts->PriceMRP}}','{{$AllProducts->PriceDiscount}}','{{$AllProducts->Details}}','{{$AllProducts->image1}}')"><i class="ti-plus"></i></a>
                                         </div>
                                     </div>
                                     <!-- Product Description -->
@@ -192,7 +192,7 @@
                                         <!-- Add to Cart -->
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="#"  onclick="showalert('{{$AllProducts->ProductID}}','{{Session::get('CustomerID')}}')" class="add-to-cart-btn">ADD TO CART</a>
+                                            <a href="#"  onclick="addProductToCart('{{$AllProducts->ProductID}}','{{Session::get('CustomerID')}}','1')" class="add-to-cart-btn">ADD TO CART</a>
                                         </div>
                                         <div class="col-6">
                                             <a href="#" onclick="showDetailsProduct('{{$AllProducts->ProductID}}')" class="view-to-product-btn">View Product</a>

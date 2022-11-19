@@ -81,11 +81,6 @@ class CustomerInfoController extends Controller
                         "statusMsg" => "Customer Added Successfully"
                     ));
                 }else{
-                    /* return json_encode(array(
-                        "statusCode" => 200,
-                        "statusMsg" => "Customer Added Successfully"
-                    )); */
-                    //$this->customerCheckUP($LoginID,$request['Password']);
                     $userName = $LoginID;
                     $userPassword =md5($request['Password']);
 
@@ -115,8 +110,7 @@ class CustomerInfoController extends Controller
                         return json_encode(array(
                             "statusCode" => 201,
                             "RealPass" => $request['idpassword'],
-                            "EncPass" => $userPassword,
-                            "sss" => json_encode($UserType)
+                            "EncPass" => $userPassword
                         ));
                     }
 
@@ -239,14 +233,14 @@ class CustomerInfoController extends Controller
     public function customerLogin(Request $request){
         try {
             $userName = $request['LoginID'];
-            $userPassword =$request['Password'];
+            $userPassword =md5($request['Password']);
 
             $UserInfo = DB::select("SELECT CustomerID,LoginID,Password,FirstName,LastName,picture,
-                                MobileNo, Address,Email,Status
-                                FROM customerinfo
-                                WHERE LoginID = '$userName'
-                                AND Password = '$userPassword'
-                                AND Status = 'Active'");
+                                        MobileNo, Address,Email,Status
+                                        FROM customerinfo
+                                        WHERE LoginID = '$userName'
+                                        AND Password = '$userPassword'
+                                        AND Status = 'Active'");
 
             if ($UserInfo) {
                 Session::put('CustomerID', $UserInfo[0]->CustomerID);
@@ -266,9 +260,8 @@ class CustomerInfoController extends Controller
             } else {
                 return json_encode(array(
                     "statusCode" => 201,
-                    "RealPass" => $request['idpassword'],
-                    "EncPass" => $userPassword,
-                    "sss" => json_encode($UserType)
+                    "RealPass" => $request['LoginID'],
+                    "EncPass" => $userPassword
                 ));
             }
 

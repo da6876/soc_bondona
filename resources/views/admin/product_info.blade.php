@@ -453,8 +453,6 @@
                     var markup = "<option value=''>Select Categorie</option>";
                     $("#Category").html(markup).show();
                 }
-
-
             }
             
         });

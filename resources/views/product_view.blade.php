@@ -147,7 +147,7 @@
                                         <input type="number" class="qty-text" id="Quantity" step="1" min="1" max="12" name="Quantity" value="1">
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     </div>
-                                    <button type="button" onclick="showalert('{{$ProductID}}','{{Session::get('CustomerID')}}')" name="addtocart" value="5" class="btn cart-submit d-block">Add to cart</button>
+                                    <button type="button" onclick="addProductToCart('{{$ProductID}}','{{Session::get('CustomerID')}}','1')" name="addtocart" value="5" class="btn cart-submit d-block">Add to cart</button>
                                 </form>
                             </div>
                             <div id="accordion" role="tablist">
@@ -231,7 +231,7 @@
                                 <div class="product-img">
                                     <img src="../{{$ProductsInfoByType->image1}}" alt="">
                                     <div class="product-quicview">
-                                        <a href="#" onclick="showProductModel('{{$ProductsInfoByType->Description}}','{{$ProductsInfoByType->PriceMRP}}',
+                                        <a href="#" onclick="showProductModel('{{$ProductsInfoByType->ProductID}}','{{$ProductsInfoByType->Description}}','{{$ProductsInfoByType->PriceMRP}}',
                                             '{{$ProductsInfoByType->PriceDiscount}}','{{$ProductsInfoByType->Details}}','{{$ProductsInfoByType->image1}}')">
                                             <i class="ti-plus"></i>
                                         </a>
@@ -244,7 +244,7 @@
                                     <!-- Add to Cart -->
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="#" class="add-to-cart-btn">ADD TO CART</a>
+                                            <a href="#"  onclick="addProductToCart('{{$ProductsInfoByType->ProductID}}','{{Session::get('CustomerID')}}','1')" class="add-to-cart-btn">ADD TO CART</a>
                                         </div>
                                         <div class="col-6">
                                             <a href="#" onclick="showDetailsProduct('{{$ProductsInfoByType->ProductID}}')" class="view-to-product-btn">View Product</a>
@@ -277,12 +277,13 @@
 </body>
 
 <script>
-    function showProductModel(Description,price,PriceDiscount,Details,Image) {
+    function showProductModel(product_id,Description,price,PriceDiscount,Details,Image) {
         $('#quickview').modal('show');
         $(".price").text('৳ '+price);
         $(".discount").text('৳ '+PriceDiscount);
         $('.title').text(Description);
         $('.details').text(Details);
+        $('#product_id').val(product_id);
         document.getElementById("pro_img").src = "../"+Image;
         $('#Status').val(data[0].Status);
     }

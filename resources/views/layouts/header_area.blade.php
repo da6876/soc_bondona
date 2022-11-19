@@ -1,3 +1,36 @@
+
+@php
+
+    $LoginID = Session::get('Customer_LoginID');
+    $CustomerID = Session::get('CustomerID');
+    $MenuItem = DB::select("SELECT Name, Link,Other
+    FROM menu_item
+    WHERE Status = 'Active'");
+
+    $CardDetails = DB::select("SELECT TB1.ProductID, Quantity,PriceMRP,Description,image1
+                FROM shopingcard TB1,productinfo TB2
+                WHERE TB1.ProductID = TB2.ProductID
+                AND CustomerID = '$CustomerID'
+                AND TB1.Status!= 'Delete';");
+
+
+    $CardTotalPrice = DB::select("SELECT ROUND(Sum(PriceMRP), 2) as Total
+                FROM shopingcard TB1,productinfo TB2
+                WHERE TB1.ProductID = TB2.ProductID
+                AND CustomerID = '$CustomerID'
+                AND TB1.Status!= 'Delete';");
+    $totalSumPriceCard = $CardTotalPrice[0]->Total;
+
+
+    $CardTotalCount = DB::select("SELECT Count(Quantity) as totalQuantity
+                FROM shopingcard TB1,productinfo TB2
+                WHERE TB1.ProductID = TB2.ProductID
+                AND CustomerID = '$CustomerID'
+                AND TB1.Status!= 'Delete';");
+    $totalQuantity= $CardTotalCount[0]->totalQuantity;
+
+@endphp
+
 <header class="header_area">
     <!-- Top Header Area Start -->
     <div class="top_header_area" id="myElement">
@@ -14,29 +47,23 @@
                         <div class="header-cart-menu d-flex align-items-center ml-auto">
                             <!-- Cart Area -->
                             <div class="cart">
-                                <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">2</span> <i class="ti-bag"></i> Your Bag $20</a>
+                                <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">{{$totalQuantity}}</span> <i class="ti-bag"></i> Your Bag {{$totalSumPriceCard}} ৳</a>
                                 <!-- Cart List Area Start -->
                                 <ul class="cart-list">
+                                    @foreach($CardDetails as $CardDetails)
                                     <li>
-                                        <a href="#" class="image"><img src="../public/home/img/product-img/product-10.jpg" class="cart-thumb" alt=""></a>
+                                        <a href="#" class="image"><img src="{{$CardDetails->image1}}" class="cart-thumb" alt=""></a>
                                         <div class="cart-item-desc">
-                                            <h6><a href="#">Women's Fashion</a></h6>
-                                            <p>1x - <span class="price">$10</span></p>
+                                            <h6><a href="#">{{$CardDetails->Description}}</a></h6>
+                                            <p>{{$CardDetails->Quantity}} - <span class="price">{{$CardDetails->PriceMRP}} ৳</span></p>
                                         </div>
                                         <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
                                     </li>
-                                    <li>
-                                        <a href="#" class="image"><img src="../public/home/img/product-img/product-11.jpg" class="cart-thumb" alt=""></a>
-                                        <div class="cart-item-desc">
-                                            <h6><a href="#">Women's Fashion</a></h6>
-                                            <p>1x - <span class="price">$10</span></p>
-                                        </div>
-                                        <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                                    </li>
+                                    @endforeach
                                     <li class="total">
-                                        <span class="pull-right">Total: $20.00</span>
-                                        <a href="cart.html" class="btn btn-sm btn-cart">Cart</a>
-                                        <a href="checkout-1.html" class="btn btn-sm btn-checkout">Checkout</a>
+                                        <span class="pull-right">Total: {{$totalSumPriceCard}} ৳</span>
+                                        <a href="{{url('cart')}}" class="btn btn-sm btn-cart">Cart</a>
+                                        <a href="{{url('checkout')}}" class="btn btn-sm btn-checkout">Checkout</a>
                                     </li>
 
 
@@ -75,11 +102,6 @@
 
                             <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
                                 <ul class="navbar-nav animated" id="nav">
-                                    @php
-                                        $MenuItem = DB::select("SELECT Name, Link,Other
-                                        FROM menu_item
-                                        WHERE Status = 'Active'");
-                                    @endphp
 
                                     @foreach($MenuItem as $MenuItem)
                                         @php
@@ -94,15 +116,14 @@
                                             </a>
                                         </li>
                                     @endforeach
-                                    @php
-                                        $LoginID = Session::get('Customer_LoginID');
-                                    @endphp
+
+
                                     @if($LoginID)
 
                                         <li class="dropdown">
 
                                             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                                Welcome, User <b class="caret"></b>
+                                                Welcome, {{Session::get('Customer_FirstName')}} <b class="caret"></b>
                                             </a>
 
                                             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -115,11 +136,19 @@
 
                                         </li>
                                     @else
+                                        <li class="dropdown">
 
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="#" onclick="forShowAlertCustomerSignUp()">
-                                                Login Or SignUp
+                                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                                Profile <b class="caret"></b>
                                             </a>
+
+                                            <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <!-- ADDED CLASS -->
+                                                <a class="dropdown-item" href="#" onclick="ShowLoginModal()">Login</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#" onclick="ShowSignUpModal()">SignUp</a>
+                                            </div>
+
                                         </li>
                                     @endif
                                 </ul>
@@ -129,7 +158,9 @@
                     </div>
                     <!-- Help Line -->
                     <div class="help-line">
+{{--
                         <a href="tel:+346573556778"><i class="ti-headphone-alt"></i> +34 657 3556 778</a>
+--}}
                     </div>
                 </div>
             </div>

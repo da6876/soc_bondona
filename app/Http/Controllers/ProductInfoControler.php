@@ -292,32 +292,62 @@ class ProductInfoControler extends Controller
 		return view('product_view',['ProductsInfo'=>$ProductsInfo]);
     }
 
-    public function addToCart(Request $request){
-        $data = array();
-        $data['ProductID'] =  $request['ProductID'];
-        $data['CustomerID'] =  $request['CustomerID'];
-        $data['ProductCode'] =  $request['ProductCode'];
-        $data['Quantity'] =  $request['Quantity'];
-        $data['Status'] =  "P";
-        $data['CreateBy'] = $request['CustomerID'];
-        $data['CreateDate'] = $this->getDates();
-        $data['UpdateBy'] = "";
-        $data['UpdateDate'] = "";
-        
-        
-        $result = DB::table('shopingcard')->insert($data);
-        if($result){
+    public function addToCart(){
+        try {
+            if (request()->input('ViewType')=="DeleteToCard"){
+                try {
+
+                    $data['Status'] = "Delete";
+                    DB::table('shopingcard')
+                        ->where('ShopingCardID', request()->input('ShopingCardID'))
+                        ->update($data);
+                    return json_encode(array(
+                        "statusCode" => 200,
+                        "statusMsg" => "Product Remove from Cart Successfully !"
+                    ));
+                } catch (\Exception $e) {
+
+                    return json_encode(array(
+                        "statusCode" => 400,
+                        "statusMsg" => "Product Remove from Cart Failed !"
+                    ));;
+                }
+
+            }else{
+                $data = array();
+                $data['ProductID'] = request()->input('ProductID');
+                $data['CustomerID'] =  request()->input('CustomerID');
+                $data['ProductCode'] =  request()->input('ProductID');
+                $data['Quantity'] =  request()->input('Quantity');
+                $data['Status'] =  "P";
+                $data['CreateBy'] = request()->input('CustomerID');
+                $data['CreateDate'] = $this->getDates();
+                $data['UpdateBy'] = "";
+                $data['UpdateDate'] = "";
+
+
+                $result = DB::table('shopingcard')->insert($data);
+                if($result){
+                    return json_encode(array(
+                        "statusCode" => 200,
+                        "statusMsg" => "Product Add to Cart Successfully !"
+                    ));
+                }else{
+                    return json_encode(array(
+                        "statusCode" => 201,
+                        "statusMsg" => "Product Add to Cart Failed !"
+                    ));
+                }
+            }
+
+        } catch (\Exception $e) {
+
             return json_encode(array(
-                "statusCode" => 200,
-                "statusMsg" => "Product Add to Cart Successfully !"
-            ));
-        }else{
-            return json_encode(array(
-                "statusCode" => 201,
-                "statusMsg" => "Product Add to Cart Failed !"
-           ));
+                "statusCode" => 400,
+                "statusMsg" => $e->getMessage()
+            ));;
         }
-        return json_encode($data );
+/*        return json_encode($data );*/
     }
 
     

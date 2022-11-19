@@ -44,6 +44,7 @@ Route::get('/cart', function () {
 });
 Route::post('AddToCart','ProductInfoControler@addToCart');
 Route::get('LogoutCus','CustomerInfoController@usersLogOut');
+Route::post('CustLogin','CustomerInfoController@customerLogin');
 
 /*
 |--------------------------------------------------------------------------
