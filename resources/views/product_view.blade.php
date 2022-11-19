@@ -232,9 +232,9 @@
                                     <img src="../{{$ProductsInfoByType->image1}}" alt="">
                                     <div class="product-quicview">
                                         <a href="#" onclick="showProductModel('{{$ProductsInfoByType->Description}}','{{$ProductsInfoByType->PriceMRP}}',
-                                        '{{$ProductsInfoByType->PriceDiscount}}','{{$ProductsInfoByType->Details}}','{{$ProductsInfoByType->image1}}')">
-                                        <i class="ti-plus"></i>
-                                    </a>
+                                            '{{$ProductsInfoByType->PriceDiscount}}','{{$ProductsInfoByType->Details}}','{{$ProductsInfoByType->image1}}')">
+                                            <i class="ti-plus"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <!-- Product Description -->

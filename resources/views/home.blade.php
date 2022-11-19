@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Karl - Fashion Ecommerce Template | Home</title>
+    <title>Bondona | Home</title>
 
     @include('layouts.header_link_files')
 
@@ -23,30 +23,30 @@
 <div id="wrapper">
 
     <!-- ****** Header Area Start ****** -->
-@include ('layouts.header_area')
-<!-- ****** Header Area End ****** -->
+    @include ('layouts.header_area')
+    <!-- ****** Header Area End ****** -->
 
 
     <!-- ****** Welcome Slides Area Start ****** -->
-@include ('layouts.welcome_area')
-<!-- ****** Welcome Slides Area End ****** -->
+    @include ('layouts.welcome_area')
+    <!-- ****** Welcome Slides Area End ****** -->
 
 
     <!-- ****** Top Discount Area Start ****** -->
-@include ('layouts.discount_area')
-<!-- ****** Top Discount Area End ****** -->
+    @include ('layouts.discount_area')
+    <!-- ****** Top Discount Area End ****** -->
 
-@php
-    $ProductsInfoByDisplayType = DB::select("SELECT TB1.ProductID,
-        TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
-        FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
-        WHERE TB1.ProductType = TB2.ProductTypeId
-        AND TB1.Color = TB4.ProductColorId
-        AND TB1.Category = TB5.ProductCategoryId
-        AND TB1.SubCategory = TB3.ProductSubCategoryId
-        AND TB1.DisplayType = 'New';");
-@endphp
-<!-- ****** New Arrivals Area ****** -->
+    @php
+        $ProductsInfoByDisplayType = DB::select("SELECT TB1.ProductID,
+            TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
+            FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+            WHERE TB1.ProductType = TB2.ProductTypeId
+            AND TB1.Color = TB4.ProductColorId
+            AND TB1.Category = TB5.ProductCategoryId
+            AND TB1.SubCategory = TB3.ProductSubCategoryId
+            AND TB1.DisplayType = 'New';");
+    @endphp
+    <!-- ****** New Arrivals Area ****** -->
     <section class="you_may_like_area clearfix">
         <div class="container">
             <br>
@@ -64,8 +64,11 @@
                             <div class="single_gallery_item">
                                 <div class="product-img">
                                     <img src="{{$DisplayTypeSData->image1}}" height="100px" alt="{{$DisplayTypeSData->Description}}">
-                                    <div class="product-quicview">
-                                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
+                                    <div class="product-quicview">                                        
+                                        <a href="#" onclick="showProductModel('{{$DisplayTypeSData->ProductID}}','{{$DisplayTypeSData->Description}}','{{$DisplayTypeSData->PriceMRP}}',
+                                            '{{$DisplayTypeSData->PriceDiscount}}','{{$DisplayTypeSData->Details}}','{{$DisplayTypeSData->image1}}')">
+                                            <i class="ti-plus"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="product-description">
@@ -90,17 +93,17 @@
     </section>
     <!-- ****** New Arrivals Area End ****** -->
 
-@php
-    $TopDisplayType = DB::select("SELECT TB1.ProductID,
-        TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
-        FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
-        WHERE TB1.ProductType = TB2.ProductTypeId
-        AND TB1.Color = TB4.ProductColorId
-        AND TB1.Category = TB5.ProductCategoryId
-        AND TB1.SubCategory = TB3.ProductSubCategoryId
-        AND TB1.DisplayType = 'Top';");
-@endphp
-<!-- ****** Hot Product Area ****** -->
+    @php
+        $TopDisplayType = DB::select("SELECT TB1.ProductID,
+            TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
+            FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+            WHERE TB1.ProductType = TB2.ProductTypeId
+            AND TB1.Color = TB4.ProductColorId
+            AND TB1.Category = TB5.ProductCategoryId
+            AND TB1.SubCategory = TB3.ProductSubCategoryId
+            AND TB1.DisplayType = 'Top';");
+    @endphp
+    <!-- ****** Hot Product Area ****** -->
     <section class="you_may_like_area clearfix">
         <div class="container">
             <br>
@@ -167,26 +170,25 @@
     </section>
     <!-- ****** Top Catagory Area End ****** -->
 
+    @php
+        $FeaturesDisplayType = DB::select("SELECT TB1.ProductID,
+            TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
+            FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+            WHERE TB1.ProductType = TB2.ProductTypeId
+            AND TB1.Color = TB4.ProductColorId
+            AND TB1.Category = TB5.ProductCategoryId
+            AND TB1.SubCategory = TB3.ProductSubCategoryId
+            AND TB1.DisplayType = 'Features';");
+    @endphp
 
-
-@php
-    $FeaturesDisplayType = DB::select("SELECT TB1.ProductID,
-        TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
-        FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
-        WHERE TB1.ProductType = TB2.ProductTypeId
-        AND TB1.Color = TB4.ProductColorId
-        AND TB1.Category = TB5.ProductCategoryId
-        AND TB1.SubCategory = TB3.ProductSubCategoryId
-        AND TB1.DisplayType = 'Features';");
-@endphp
-<!-- ****** Hot Product Area ****** -->
+    <!-- ****** Hot Product Area ****** -->
     <section class="you_may_like_area clearfix">
         <div class="container">
             <br>
             <div class="row">
                 <div class="col-12">
                     <div class="section_heading text-left">
-                        <h3>Hot Product</h3>
+                        <h3>Hots Product</h3>
                     </div>
                 </div>
             </div>
@@ -210,7 +212,7 @@
                                     <!-- Add to Cart -->
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="#"  onclick="showalert('{{$FeaturesDisplayType->ProductID}}','{{Session::get('CustomerID')}}')" class="add-to-cart-btn">ADD TO CART</a>
+                                            <a href="#"  onclick="showalert('{{$TopDisplayType->ProductID}}','{{Session::get('CustomerID')}}')" class="add-to-cart-btn">ADD TO CART</a>
                                         </div>
                                         <div class="col-6">
                                             <a href="#" onclick="showDetailsProduct('{{$FeaturesDisplayType->ProductID}}')" class="view-to-product-btn">View Product</a>
@@ -228,8 +230,6 @@
         </div>
     </section>
     <!-- ****** Hot Product Area End ****** -->
-
-
 
     <!-- ****** Offer Area Start ****** -->
     <section class="offer_area height-700 section_padding_100 bg-img" style="background-image: url(public/home/img/bg-img/bg-5.jpg);">
@@ -249,10 +249,15 @@
         </div>
     </section>
     <!-- ****** Offer Area End ****** -->
+        
+    <!-- ****** Quick View Modal Area Start ****** -->
+    @include('layouts.show_product_model')
+    <!-- ****** Quick View Modal Area End ****** -->
+
 
     <!-- ****** Footer Area Start ****** -->
-@include('layouts.footer_bar')
-<!-- ****** Footer Area End ****** -->
+    @include('layouts.footer_bar')
+    <!-- ****** Footer Area End ****** -->
 </div>
 <!-- /.wrapper end -->
 

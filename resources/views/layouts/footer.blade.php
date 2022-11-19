@@ -1,23 +1,4 @@
-<script>
-    /* window.onscroll = function() {myFunction()};
-    
-    var navbar = document.getElementById("navbar");
-    var sticky = navbar.offsetTop;
-    
-    function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
-      } else {
-        navbar.classList.remove("sticky");
-      }
-    } */
-    
-        
-    function showDetailsProduct(ID) {
-             var url = "{{ url('product_views') }}" + '/' + ID;
-            window.location.href = url;
-        }
-    </script>
+
 <!-- jQuery (Necessary for All JavaScript Plugins) -->
 <script src="{{asset('public/home/js/jquery/jquery-2.2.4.min.js')}}"></script>
 <!-- Popper js -->
@@ -34,30 +15,35 @@
 
 
 <script>
+function showDetailsProduct(ID) {
+    var url = "{{ url('product_views') }}" + '/' + ID;
+    window.location.href = url;
+}
 
-  function forShowAlertCustomerSignUp() {
-      $('#CustomerSignIn').modal('show');
-  }
 
-  function checkData(){
-      if($('#Primary1').is(":checked") && $('#Primary2').is(":checked") ){
+function forShowAlertCustomerSignUp() {
+    $('#CustomerSignIn').modal('show');
+}
+
+function checkData(){
+    if($('#Primary1').is(":checked") && $('#Primary2').is(":checked") ){
         swal({
             title: "Oops",
             text: "Please Check Only One for Primary or Login ID",
             timer: '1500'
         });
-      }else if($('#Primary1').is(":checked")){
+    }else if($('#Primary1').is(":checked")){
         singUpCustomer();
-      }else if($('#Primary2').is(":checked")){
-          singUpCustomer();
-      }else{
+    }else if($('#Primary2').is(":checked")){
+        singUpCustomer();
+    }else{
         swal({
             title: "Oops",
             text: "Please Check Only One for Primary or Login ID",
             timer: '1500'
         });
-      }
-  }
+    }
+}
 
   function singUpCustomer() {
     $.ajaxSetup({
@@ -138,7 +124,8 @@
       });
   }
 
-  function showalert(ProductId,CustomerId){
+  function showalert(ShowType,ProductId,CustomerId){
+    if()
       if(CustomerId==""){
           forShowAlertCustomerSignUp();
       }else{
@@ -228,19 +215,33 @@
 
   };
 
-  function showProductModel(Description,price,PriceDiscount,Details,Image) {
-      $('#quickview').modal('show');
-      $(".price").text('৳ '+price);
-      $(".discount").text('৳ '+PriceDiscount);
-      $('.title').text(Description);
-      $('.details').text(Details);
-      document.getElementById("pro_img").src = Image;
-      $('#Status').val(data[0].Status);
-  }
+
+function showProductModel(product_id,Description,price,PriceDiscount,Details,Image) {
+    $('#quickview').modal('show');
+    $(".price").text('৳ '+price);
+    $(".discount").text('৳ '+PriceDiscount);
+    $('.title').text(Description);
+    $('.details').text(Details);
+    $('#product_id').val(Image);
+    document.getElementById("pro_img").src = ""+Image;
+    $('#Status').val(data[0].Status);
+} 
+
 
   function showDetailsProduct(ID) {
       var url = "{{ url('product_views') }}" + '/' + ID;
       window.location.href = url;
+  }
+
+
+  function ShowLoginModal(){
+    $('#CustomerSignUp').modal('hide');
+    $('#CustomerSignIn').modal('show');
+  }
+
+  function ShowSignUpModal(){
+    $('#CustomerSignIn').modal('hide');
+    $('#CustomerSignUp').modal('show');
   }
 
 
