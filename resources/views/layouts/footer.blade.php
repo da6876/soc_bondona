@@ -258,6 +258,10 @@
         $('#CustomerForgetPass').modal('show');
     }
 
+    function addShippingAddress() {
+        $('#AddShippingAddress').modal('show');
+    }
+
     function showProductModel(product_id, Description, price, PriceDiscount, Details, Image) {
         $('#quickview').modal('show');
         $(".price").text('৳ ' + price);

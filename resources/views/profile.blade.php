@@ -12,69 +12,187 @@
     <title>Bondona | Cart Details</title>
 
     @include('layouts.header_link_files')
-        
-      
+
+
 </head>
 
 <body>
-    <div class="catagories-side-menu">
-        @include ('layouts.catagories_side_menu')
-    </div>
+<div class="catagories-side-menu">
+    @include ('layouts.catagories_side_menu')
+</div>
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- ****** Header Area Start ****** -->
-        @include ('layouts.header_area')
-        <!-- ****** Header Area End ****** -->
+    <!-- ****** Header Area Start ****** -->
+@include ('layouts.header_area')
+<!-- ****** Header Area End ****** -->
 
-    @php
+@php
 
     $CustomerID = Session::get('CustomerID');
+    $OrderDetails = DB::select("SELECT ProductCode,Description,PriceMRP,image1,
+                    TB1.OrderID,CustomerID, PhoneNo, ShipingAddress, PaymentMethod, TransID,TB2.Quantity,
+                    TotalPrice, Discount, DeliveryCharges,TB1.Status, TB1.CreateDate, TB1.UpdateBy, TB1.UpdateDate
+                    FROM orderinfo_mst TB1,orderinfo_dtl TB2,productinfo TB3
+                    WHERE TB1.OrderID = TB2.OrderID
+                    AND TB3.ProductID =TB2.ProductCode
+                    AND CustomerID = '$CustomerID';");
+@endphp
 
-    @endphp
+<!-- ****** Popular Brands Area Start ****** -->
+    <div class="col-12 col-md-12 col-lg-12 ml-lg-auto">
+        <div class="order-details-confirmation">
+            <div id="accordion" role="tablist" class="mb-4">
 
-        <!-- ****** Popular Brands Area Start ****** -->
-        <div class="cart_area section_padding_100 clearfix">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingOne">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true"
+                               ria-controls="collapseOne">
+                                <i class="fa fa-circle-o mr-3"></i>
+                                Profile
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne"
+                         data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="col-12 col-md-12">
+                                <div class="checkout_details_area clearfix">
+
+                                    <form action="#" method="post" enctype="multipart/form-data">
+                                        {{csrf_field()}}
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="first_name">Full Name </label>
+                                                <input type="text" class="form-control" id="FirstName" name="FirstName"
+                                                       value="" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="first_name">Phone No </label>
+                                                <input type="text" class="form-control" id="FirstName" name="FirstName"
+                                                       value="" required>
+                                            </div>
+                                            <div class="col-md-12 mb-6">
+                                                <label for="first_name">Email </label>
+                                                <input type="text" class="form-control" id="FirstName" name="FirstName"
+                                                       value="" required>
+                                            </div>
+                                            <div class="col-md-12 mb-6">
+                                                <label for="first_name">Address </label>
+                                                <input type="text" class="form-control" id="FirstName" name="FirstName"
+                                                       value="" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="first_name">Gender</label>
+                                                <select class="custom-select d-block w-100" id="country">
+                                                    <option value="usa" selected>Select Gender</option>
+                                                    <option value="uk">Male</option>
+                                                    <option value="ger">FeMale</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="first_name">Date Of Birt</label>
+                                                <input type="text" class="form-control" id="FirstName" name="FirstName"
+                                                       value="" required>
+                                            </div>
+                                            <div class="col-md-12 mb-6">
+
+                                                <a href="#" onclick="checkData()" class="btn karl-checkout-btn">Save</a>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
                             </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                         </div>
-
                     </div>
                 </div>
 
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingTwo">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false"
+                               aria-controls="collapseTwo">
+                                <i class="fa fa-circle-o mr-3"></i>
+                                Order History
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo"
+                         data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Product Info</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($OrderDetails as $OrderDetails)
+                                    <tr>
+                                        <td>{{$OrderDetails->Description}}</td>
+                                        <td>{{$OrderDetails->Quantity}}</td>
+                                        <td>{{$OrderDetails->PriceMRP}}</td>
+                                        <td>{{$OrderDetails->Status}}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">Cancel</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingThree">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false"
+                               aria-controls="collapseThree"><i class="fa fa-circle-o mr-3"></i>Shipping Addresses</a>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree"
+                         data-parent="#accordion">
+                        <div class="card-body text-center">
+                            <p><button onclick="addShippingAddress()" class="btn btn-lg btn-info">Add New Address</button></p>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
-        <!-- ****** Popular Brands Area End ****** -->
-
-        <!-- ****** Footer Area Start ****** -->
-        @include('layouts.footer_bar')
-        <!-- ****** Footer Area End ****** -->
-        
-        <!-- ****** Quick View Modal Area Start ****** -->
-        @include('layouts.show_product_model')
-        <!-- ****** Quick View Modal Area End ****** -->
-
     </div>
-    <!-- /.wrapper end -->
-    
-    @include('layouts.footer')
+    <!-- ****** New Arrivals Area End ****** -->
+
+    <!-- ****** Footer Area Start ****** -->
+@include('layouts.footer_bar')
+<!-- ****** Footer Area End ****** -->
+
+    <!-- ****** Quick View Modal Area Start ****** -->
+@include('layouts.show_product_model')
+<!-- ****** Quick View Modal Area End ****** -->
+
+</div>
+<!-- /.wrapper end -->
+
+@include('layouts.footer')
 
 </body>
 
 <script>
-    function  deleteCard(ShopingCardID) {
+    function deleteCard(ShopingCardID) {
         if (ShopingCardID != "") {
             var csrf_tokens = document.querySelector('meta[name="csrf-token"]').content;
             url = "{{ url('AddToCart') }}";

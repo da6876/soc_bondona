@@ -215,59 +215,85 @@
     </div>
 </div>
 
-{{--
 
-<div class="modal fade" id="CustomerForgetPass" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade bd-example-modal-lg " id="AddShippingAddress"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 
         <div class="modal-content">
             <div class="container">
                 <div class="col-md mb-md-0 mb-5">
-                        <div class="modal-body p-0">
+                    <div class="modal-body p-0">
+                        <div class="col-12 col-md-12">
+
                             <div class="checkout_details_area mt-50 clearfix">
+
                                 <div class="cart-page-heading">
-                                    <h3 class="mb-4">Forget Password</h3>
+                                    <h4 class="mb-4">Shipping Address</h4>
                                     <p>Enter your Information Here</p>
                                 </div>
+
                                 <form action="#" method="post" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="row">
-                                        <div class="col-12 mb-3 alert alert-danger" id="error" style="display: none;"></div>
-                                        <div class="col-12 mb-3 alert alert-success" id="sentSuccess" style="display: none;"></div>
-
-                                        <div class="col-12 mb-3">
-                                            <label for="phone_number">Phone/ <span>*</span></label>
-                                            <input type="text" class="form-control" id="mobileno" name="mobileno" min="0" placeholder="+880** *** *****" value="+880">
+                                        <div class="col-md-12 mb-6">
+                                            <label for="first_name">Recipient Name <span>*</span></label>
+                                            <input type="text" class="form-control" id="RecipientName" name="RecipientName" value="" required>
                                         </div>
+                                        <div class="col-md-12 mb-6">
+                                            <label for="first_name">Phone <span>*</span></label>
+                                            <input type="text" class="form-control" id="Phone" name="Phone" value="" required>
+                                        </div>
+                                        <div class="col-md-12 mb-6">
+                                            <label for="first_name">Address <span>*</span></label>
+                                            <input type="text" class="form-control" id="Address" name="Address" value="" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="country">Shipping Location <span>*</span></label>
+                                            <select class="custom-select d-block w-100" id="country">
+                                                <option value="Inside dhaka city" selected>Select Shipping Location</option>
+                                                <option value="Inside dhaka city" >Inside dhaka city</option>
+                                                <option value="Outside dhaka city">Outside dhaka city</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="first_name">City <span>*</span></label>
+                                            <input type="text" class="form-control" id="City" name="City" value="" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="first_name">ShippingLocation <span>*</span></label>
+                                            <input type="text" class="form-control" id="ShippingLocation" name="ShippingLocation" value="" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="country">Country <span>*</span></label>
+                                            <select class="custom-select d-block w-100" id="country">
+                                                <option value="usa" selected>Bangladesh</option>
+                                                <option value="uk">United Kingdom</option>
+                                                <option value="ger">Germany</option>
+                                                <option value="fra">France</option>
+                                                <option value="ind">India</option>
+                                                <option value="aus">Australia</option>
+                                                <option value="bra">Brazil</option>
+                                                <option value="cana">Canada</option>
+                                            </select>
+                                        </div>
+
 
 
                                         <div class="col-12 mb-4">
-                                            <div id="recaptcha-container"></div>
-                                        </div>
-                                        <div class="col-12 mb-4">
-                                            <a href="#" onclick="SendCode()" class="btn karl-checkout-btn">Send OTP</a>
+                                            <a href="#" onclick="checkData()" class="btn karl-checkout-btn">Save Address</a>
                                         </div>
 
-                                        <div class="alert alert-success" id="successRegsiter" style="display: none;"></div>
-
-                                        <div class="col-12 mb-3">
-                                            <label for="phone_number">Code<span>*</span></label>
-                                            <input type="text" class="form-control" id="code" name="code" min="0" placeholder="******" value="">
-                                        </div>
-                                        <div class="col-12 mb-4">
-                                            <a href="#" onclick="VerifyCode()" class="btn karl-checkout-btn">Code Verify</a>
-                                        </div>
 
                                     </div>
 
                                 </form>
+
                             </div>
+
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
---}}

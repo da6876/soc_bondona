@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2022 at 04:06 PM
+-- Generation Time: Nov 20, 2022 at 06:36 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -366,6 +366,28 @@ INSERT INTO `producttype` (`ProductTypeId`, `Name`, `Status`, `CreateBy`, `Creat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shipping_address`
+--
+
+CREATE TABLE `shipping_address` (
+  `ShippingAddresId` int(10) NOT NULL,
+  `CustomerID` int(10) DEFAULT NULL,
+  `RecipientName` varchar(100) DEFAULT NULL,
+  `Phone` varchar(15) DEFAULT NULL,
+  `Address` varchar(250) DEFAULT NULL,
+  `ShippingLocation` varchar(50) DEFAULT NULL,
+  `City` varchar(50) DEFAULT NULL,
+  `PostalCode` varchar(20) DEFAULT NULL,
+  `country_id` int(10) DEFAULT NULL,
+  `CreateBy` varchar(20) DEFAULT NULL,
+  `CreateDate` varchar(20) DEFAULT NULL,
+  `UpdateBy` varchar(20) DEFAULT NULL,
+  `UpdateDate` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `shopingcard`
 --
 
@@ -499,6 +521,12 @@ ALTER TABLE `producttype`
   ADD PRIMARY KEY (`ProductTypeId`);
 
 --
+-- Indexes for table `shipping_address`
+--
+ALTER TABLE `shipping_address`
+  ADD PRIMARY KEY (`ShippingAddresId`);
+
+--
 -- Indexes for table `shopingcard`
 --
 ALTER TABLE `shopingcard`
@@ -579,6 +607,12 @@ ALTER TABLE `productsubcategory`
 --
 ALTER TABLE `producttype`
   MODIFY `ProductTypeId` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30004;
+
+--
+-- AUTO_INCREMENT for table `shipping_address`
+--
+ALTER TABLE `shipping_address`
+  MODIFY `ShippingAddresId` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `shopingcard`
