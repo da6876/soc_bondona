@@ -39,12 +39,21 @@ Route::get('/checkout', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
+Route::get('ProductByCategories/{id}', 'ProductInfoControler@ProductByCatSubCat');
+
 Route::get('/cart', function () {
     return view('cart');
+});
+Route::get('/profile', function () {
+    return view('profile');
+});
+Route::get('/OrderInfo', function () {
+    return view('order_info');
 });
 Route::post('AddToCart','ProductInfoControler@addToCart');
 Route::get('LogoutCus','CustomerInfoController@usersLogOut');
 Route::post('CustLogin','CustomerInfoController@customerLogin');
+Route::post('PlaceOrder','CustomerInfoController@custPlaceOrder');
 
 /*
 |--------------------------------------------------------------------------

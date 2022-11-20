@@ -39,7 +39,7 @@ class CustomerInfoController extends Controller
                 }elseif($request['Primary2']=="1"){
                     $LoginID = $request['Email'];
                 }else{
-                    $LoginID = "NO AA";
+                    $LoginID = $request['MobileNo'];
                 }
                 
                 $data['LoginID'] = $LoginID;
@@ -316,6 +316,57 @@ class CustomerInfoController extends Controller
                 "statusCode" => 201,
                 "statusMsg" => $e->getMessage()
             ));
+        }
+    }
+
+    public function custPlaceOrder(){
+        $statement  = DB::select("SHOW TABLE STATUS LIKE 'orderinfo_mst'");
+        $OrderID = $statement[0]->Auto_increment;
+
+        $CustomerID = request()->input('CustomerID');
+
+        $data = array();
+        $data['CustomerID'] = $CustomerID;
+        $data['PhoneNo'] = request()->input('PhoneNo');
+        $data['ShipingAddress'] = request()->input('ShipingAddress');
+        $data['PaymentMethod'] = request()->input('PaymentType');
+        $data['TransID'] = request()->input('ViewType');
+        $data['TotalPrice'] = request()->input('TotalPrice');
+        $data['Discount'] = request()->input('Discount');
+        $data['DeliveryCharges'] = request()->input('DeliveryCharges');
+        $data['Status'] = "Pending";
+        $data['CreateBy'] = request()->input('CustomerID');
+        $data['CreateDate'] =  $this->getDates();
+
+        $ShopInfo = DB::select("SELECT  ShopingCardID,ProductID, ProductCode, Quantity FROM shopingcard
+                                        WHERE CustomerID = ' $CustomerID'");
+
+        $ShopInfoCount = DB::select("SELECT count(CustomerID) as Total FROM shopingcard WHERE CustomerID = ' $CustomerID'");
+
+        $totalCount = $ShopInfoCount[0]->Total;
+
+        $insert=0;
+        foreach ($ShopInfo as $ShopInfo) {
+            $data1['OrderID'] = $OrderID;
+            $data1['ProductCode'] = $ShopInfo->ProductCode;
+            $data1['Quantity'] = $ShopInfo->Quantity;
+            $data1['Price'] = "000";
+            $result = DB::table('orderinfo_dtl')->insert($data1);
+            if ($result){
+                $data3['Status'] = "Delete";
+                DB::table('shopingcard')
+                    ->where('ShopingCardID',  $ShopInfo->ShopingCardID)
+                    ->update($data3);
+                $insert++;
+            }
+        }
+        if ($insert==$totalCount){
+           $result = DB::table('orderinfo_mst')->insert($data);
+             return json_encode(array(
+                 "statusCode" => 200,
+                 "statusMsg" => "Oder Place Successfully"
+             ));
+
         }
     }
 

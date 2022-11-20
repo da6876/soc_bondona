@@ -350,7 +350,6 @@ class ProductInfoControler extends Controller
 /*        return json_encode($data );*/
     }
 
-    
     public function ShowSubList(){
         try {
             $ViewType = request()->input('ViewType');
@@ -423,6 +422,26 @@ class ProductInfoControler extends Controller
         } catch (\Exception $e) {
             return view('errorpage.database_error');
         }
+    }
+
+    public function ProductByCatSubCat($ProductSubCategoryId){
+
+        $AllProducts = DB::select("SELECT TB1.ProductID, TB1.ProductType,
+                                    TB2.Name as ProductTypeName,TB1.Color,TB4.Name as ColorName, TB1.Category,
+                                    TB5.Name as CategoryName, TB1.SubCategory,TB3.Name as SubCategoryName,
+                                    TB1.DisplayType, TB1.Description, TB1.Details, TB1.Material, TB1.Care,
+                                    TB1.PriceMRP, TB1.PriceDiscount, TB1.image1, TB1.image2, TB1.image3,
+                                    TB1.image4, TB1.Status, TB1.CreateBy, TB1.CreateDate, TB1.UpdateBy,
+                                    TB1.UpdateDate 
+                                    FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+                                    WHERE TB1.ProductType = TB2.ProductTypeId
+                                    AND TB1.Color = TB4.ProductColorId
+                                    AND TB1.Category = TB5.ProductCategoryId
+                                    AND TB1.SubCategory = TB3.ProductSubCategoryId
+                                    and TB1.SubCategory = '$ProductSubCategoryId';");
+        return view('filtter_shop', ['AllProducts' => $AllProducts]);
+
+        //return view("filtter_shop");*/
     }
 
     public function getDates(){

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title  -->
-    <title>Bondona | Product View</title>
+    <title>Bondona | Product View By Category</title>
 
     @include('layouts.header_link_files')
         
@@ -41,26 +41,12 @@
             <div class="container">
                 <div class="row">
 
-
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="shop_grid_product_area">
                             <div class="row">
 
-                                <!-- Single gallery Item -->
 
                                 @php
-                                    $AllProducts = DB::select('SELECT TB1.ProductID, TB1.ProductType,
-                                    TB2.Name as ProductTypeName,TB1.Color,TB4.Name as ColorName, TB1.Category,
-                                    TB5.Name as CategoryName, TB1.SubCategory,TB3.Name as SubCategoryName,
-                                    TB1.DisplayType, TB1.Description, TB1.Details, TB1.Material, TB1.Care,
-                                    TB1.PriceMRP, TB1.PriceDiscount, TB1.image1, TB1.image2, TB1.image3,
-                                    TB1.image4, TB1.Status, TB1.CreateBy, TB1.CreateDate, TB1.UpdateBy,
-                                    TB1.UpdateDate 
-                                    FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
-                                    WHERE TB1.ProductType = TB2.ProductTypeId
-                                    AND TB1.Color = TB4.ProductColorId
-                                    AND TB1.Category = TB5.ProductCategoryId
-                                    AND TB1.SubCategory = TB3.ProductSubCategoryId;');
                                     $delay=1;
                                 @endphp
 
@@ -71,7 +57,7 @@
                                 <div class="col-12 col-sm-6 col-lg-3 single_gallery_item wow fadeInUpBig" data-wow-delay="0.{{2+$delay}}s">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                        <img src="{{$AllProducts->image1}}" alt="">
+                                        <img src="../{{$AllProducts->image1}}" alt="">
                                         <div class="product-quicview">
                                             <a href="#" onclick="showProductModel('{{$AllProducts->ProductID}}','{{$AllProducts->Description}}','{{$AllProducts->PriceMRP}}','{{$AllProducts->PriceDiscount}}','{{$AllProducts->Details}}','{{$AllProducts->image1}}')"><i class="ti-plus"></i></a>
                                         </div>

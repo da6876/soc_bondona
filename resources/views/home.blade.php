@@ -15,9 +15,38 @@
     @include('layouts.header_link_files')
 
 </head>
+@php
+    $ProductsInfoByDisplayType = DB::select("SELECT TB1.ProductID,
+        TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
+        FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+        WHERE TB1.ProductType = TB2.ProductTypeId
+        AND TB1.Color = TB4.ProductColorId
+        AND TB1.Category = TB5.ProductCategoryId
+        AND TB1.SubCategory = TB3.ProductSubCategoryId
+        AND TB1.DisplayType = 'New';");
+
+    $TopDisplayType = DB::select("SELECT TB1.ProductID,
+        TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
+        FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+        WHERE TB1.ProductType = TB2.ProductTypeId
+        AND TB1.Color = TB4.ProductColorId
+        AND TB1.Category = TB5.ProductCategoryId
+        AND TB1.SubCategory = TB3.ProductSubCategoryId
+        AND TB1.DisplayType = 'Top';");
+
+    $FeaturesDisplayType = DB::select("SELECT TB1.ProductID,
+        TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
+        FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
+        WHERE TB1.ProductType = TB2.ProductTypeId
+        AND TB1.Color = TB4.ProductColorId
+        AND TB1.Category = TB5.ProductCategoryId
+        AND TB1.SubCategory = TB3.ProductSubCategoryId
+        AND TB1.DisplayType = 'Features';");
+@endphp
 
 <body>
 <div class="catagories-side-menu">
+
     @include ('layouts.catagories_side_menu')
 </div>
 
@@ -37,16 +66,7 @@
     @include ('layouts.discount_area')
     <!-- ****** Top Discount Area End ****** -->
 
-    @php
-        $ProductsInfoByDisplayType = DB::select("SELECT TB1.ProductID,
-            TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
-            FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
-            WHERE TB1.ProductType = TB2.ProductTypeId
-            AND TB1.Color = TB4.ProductColorId
-            AND TB1.Category = TB5.ProductCategoryId
-            AND TB1.SubCategory = TB3.ProductSubCategoryId
-            AND TB1.DisplayType = 'New';");
-    @endphp
+
     <!-- ****** New Arrivals Area ****** -->
     <section class="you_may_like_area clearfix">
         <div class="container">
@@ -94,16 +114,7 @@
     </section>
     <!-- ****** New Arrivals Area End ****** -->
 
-    @php
-        $TopDisplayType = DB::select("SELECT TB1.ProductID,
-            TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
-            FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
-            WHERE TB1.ProductType = TB2.ProductTypeId
-            AND TB1.Color = TB4.ProductColorId
-            AND TB1.Category = TB5.ProductCategoryId
-            AND TB1.SubCategory = TB3.ProductSubCategoryId
-            AND TB1.DisplayType = 'Top';");
-    @endphp
+
     <!-- ****** Hot Product Area ****** -->
     <section class="you_may_like_area clearfix">
         <div class="container">
@@ -173,17 +184,6 @@
         </div>
     </section>
     <!-- ****** Top Catagory Area End ****** -->
-
-    @php
-        $FeaturesDisplayType = DB::select("SELECT TB1.ProductID,
-            TB1.Category,TB1.Description,TB1.Details,TB1.PriceMRP,TB1.PriceDiscount, TB1.image1
-            FROM productinfo TB1,producttype TB2,productsubcategory TB3,productcolor TB4,productcategory TB5
-            WHERE TB1.ProductType = TB2.ProductTypeId
-            AND TB1.Color = TB4.ProductColorId
-            AND TB1.Category = TB5.ProductCategoryId
-            AND TB1.SubCategory = TB3.ProductSubCategoryId
-            AND TB1.DisplayType = 'Features';");
-    @endphp
 
     <!-- ****** Hot Product Area ****** -->
     <section class="you_may_like_area clearfix">
@@ -258,7 +258,7 @@
         </div>
     </section>
     <!-- ****** Offer Area End ****** -->
-        
+
     <!-- ****** Quick View Modal Area Start ****** -->
     @include('layouts.show_product_model')
     <!-- ****** Quick View Modal Area End ****** -->
@@ -267,6 +267,7 @@
     <!-- ****** Footer Area Start ****** -->
     @include('layouts.footer_bar')
     <!-- ****** Footer Area End ****** -->
+
 </div>
 <!-- /.wrapper end -->
 

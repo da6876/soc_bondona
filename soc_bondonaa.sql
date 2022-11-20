@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2022 at 09:06 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.26
+-- Generation Time: Nov 20, 2022 at 04:06 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,7 +49,11 @@ CREATE TABLE `customerinfo` (
 --
 
 INSERT INTO `customerinfo` (`CustomerID`, `LoginID`, `Password`, `FirstName`, `LastName`, `picture`, `MobileNo`, `Email`, `Address`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
-(20013, '01684924439', 'e10adc3949ba59abbe56e057f20f883e', 'Dhali', 'Abir', 'public/allImages/CustomerImage/nMKXTS.jpg', '01684924439', 'dhaliabir@gmail.com', 'Dhaka,bangladesh', 'Active', '01684924439', '17/11/2022', '', '');
+(20006, 'NO AA', 'bcbe3365e6ac95ea2c0343a2395834dd', 'AAA', NULL, 'No Image', '2222', 'asd@asdad', NULL, 'Active', 'NO AA', '19/11/2022', '', ''),
+(20007, '01684924439', 'e10adc3949ba59abbe56e057f20f883e', 'Dhali Abir', NULL, 'No Image', '01684924439', 'dhali@gmail.com', NULL, 'Active', '01684924439', '19/11/2022', '', ''),
+(20008, '01315007287', 'e10adc3949ba59abbe56e057f20f883e', 'Abir', NULL, 'No Image', '01315007287', 'abir@gmail.com', NULL, 'Active', '01315007287', '19/11/2022', '', ''),
+(20009, '01315007287', 'e10adc3949ba59abbe56e057f20f883e', 'AbirDhali', NULL, 'No Image', '+8801315007287', NULL, NULL, 'Active', 'NO AA', '20/11/2022', '', ''),
+(20010, '+8801632594374', '25d55ad283aa400af464c76d713c07ad', 'rifat', NULL, 'No Image', '+8801632594374', NULL, NULL, 'Active', '+8801632594374', '20/11/2022', '', '');
 
 -- --------------------------------------------------------
 
@@ -76,30 +80,66 @@ CREATE TABLE `menu_item` (
 INSERT INTO `menu_item` (`menu_item_id`, `Name`, `Link`, `Other`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
 (1, 'Home', '/', 'Home', 'Active', '10000', '13/11/2022', '10000', '13/11/2022'),
 (2, 'Shop', 'shop', 'Shop', 'Active', '10000', '13/11/2022', '10000', '13/11/2022'),
-(3, 'Women Collection', '#', 'Hot', 'Active', '10000', '13/11/2022', '10000', '13/11/2022'),
-(4, 'Men Collection', '#', 'Hot', 'Active', '10000', '13/11/2022', '10000', '13/11/2022'),
-(5, 'Contact', 'Contact', 'Contact', 'Active', '10000', '13/11/2022', '', '');
+(3, 'Women Collection', '#', 'Hot', 'InActive', '10000', '13/11/2022', '10000', '20/11/2022'),
+(4, 'Men Collection', '#', 'Hot', 'InActive', '10000', '13/11/2022', '10000', '20/11/2022'),
+(5, 'Contact', 'Contact', 'Contact', 'InActive', '10000', '13/11/2022', '', ''),
+(6, 'Cart', 'cart', 'A', 'Active', '10000', '20/11/2022', '', ''),
+(7, 'Winter Collection', '#', 'Hot', 'Active', '10000', '20/11/2022', '10000', '20/11/2022');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orderinfo`
+-- Table structure for table `orderinfo_dtl`
 --
 
-CREATE TABLE `orderinfo` (
+CREATE TABLE `orderinfo_dtl` (
+  `orderinfo_dtl_id` int(6) NOT NULL,
+  `OrderID` int(6) NOT NULL,
+  `ProductCode` int(10) NOT NULL,
+  `Quantity` varchar(10) NOT NULL,
+  `Price` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orderinfo_dtl`
+--
+
+INSERT INTO `orderinfo_dtl` (`orderinfo_dtl_id`, `OrderID`, `ProductCode`, `Quantity`, `Price`) VALUES
+(12, 110003, 110000, '1', '000'),
+(13, 110003, 110005, '1', '000'),
+(14, 110003, 110001, '1', '000'),
+(15, 110004, 110001, '1', '000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderinfo_mst`
+--
+
+CREATE TABLE `orderinfo_mst` (
   `OrderID` int(6) UNSIGNED NOT NULL,
-  `ProductCode` int(6) DEFAULT NULL,
   `CustomerID` int(6) DEFAULT NULL,
+  `PhoneNo` varchar(15) NOT NULL,
   `ShipingAddress` varchar(250) DEFAULT NULL,
   `PaymentMethod` varchar(30) DEFAULT NULL,
   `TransID` varchar(50) DEFAULT NULL,
-  `Quantity` varchar(15) DEFAULT NULL,
+  `TotalPrice` varchar(15) DEFAULT NULL,
+  `Discount` varchar(10) DEFAULT '00',
+  `DeliveryCharges` varchar(10) DEFAULT '00',
   `Status` varchar(10) DEFAULT NULL,
   `CreateBy` varchar(20) DEFAULT NULL,
   `CreateDate` varchar(20) DEFAULT NULL,
   `UpdateBy` varchar(20) DEFAULT NULL,
   `UpdateDate` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orderinfo_mst`
+--
+
+INSERT INTO `orderinfo_mst` (`OrderID`, `CustomerID`, `PhoneNo`, `ShipingAddress`, `PaymentMethod`, `TransID`, `TotalPrice`, `Discount`, `DeliveryCharges`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
+(110003, 20008, '01315007287', 'Dhaka', 'Cash On Delivery', 'PlaceOrder', '3165.12', '0', '0', 'Pending', '20008', '20/11/2022', NULL, NULL),
+(110004, 20010, '01632594374', 'mirpur', 'Cash On Delivery', 'PlaceOrder', '600', '0', '0', 'Pending', '20010', '20/11/2022', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -347,14 +387,11 @@ CREATE TABLE `shopingcard` (
 --
 
 INSERT INTO `shopingcard` (`ShopingCardID`, `ProductID`, `CustomerID`, `ProductCode`, `Quantity`, `Status`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
-(110001, 110001, 525049, '110001', '1', 'P', '525049', '10/11/2022', '', ''),
-(110002, 110001, 525049, '110001', '1', 'P', '525049', '10/11/2022', '', ''),
-(110003, 110001, NULL, '110001', '1', 'P', NULL, '10/11/2022', '', ''),
-(110004, 110005, 20013, '110005', '1', 'P', '20013', '17/11/2022', '', ''),
-(110005, 110004, 20013, '110004', '1', 'P', '20013', '17/11/2022', '', ''),
-(110006, 110005, 20013, '110005', '1', 'P', '20013', '17/11/2022', '', ''),
-(110007, 110005, 20013, '110005', '1', 'P', '20013', '17/11/2022', '', ''),
-(110008, 110005, 20013, '110005', '1', 'P', '20013', '17/11/2022', '', '');
+(110029, 110000, 20008, '110000', '1', 'Delete', '20008', '20/11/2022', '', ''),
+(110030, 110005, 20008, '110005', '1', 'Delete', '20008', '20/11/2022', '', ''),
+(110031, 110001, 20008, '110001', '1', 'Delete', '20008', '20/11/2022', '', ''),
+(110032, 110002, 20008, '110002', '1', 'P', '20008', '20/11/2022', '', ''),
+(110033, 110001, 20010, '110001', '1', 'Delete', '20010', '20/11/2022', '', '');
 
 -- --------------------------------------------------------
 
@@ -408,9 +445,15 @@ ALTER TABLE `menu_item`
   ADD PRIMARY KEY (`menu_item_id`);
 
 --
--- Indexes for table `orderinfo`
+-- Indexes for table `orderinfo_dtl`
 --
-ALTER TABLE `orderinfo`
+ALTER TABLE `orderinfo_dtl`
+  ADD PRIMARY KEY (`orderinfo_dtl_id`);
+
+--
+-- Indexes for table `orderinfo_mst`
+--
+ALTER TABLE `orderinfo_mst`
   ADD PRIMARY KEY (`OrderID`);
 
 --
@@ -475,19 +518,25 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `customerinfo`
 --
 ALTER TABLE `customerinfo`
-  MODIFY `CustomerID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20014;
+  MODIFY `CustomerID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20011;
 
 --
 -- AUTO_INCREMENT for table `menu_item`
 --
 ALTER TABLE `menu_item`
-  MODIFY `menu_item_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `menu_item_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `orderinfo`
+-- AUTO_INCREMENT for table `orderinfo_dtl`
 --
-ALTER TABLE `orderinfo`
-  MODIFY `OrderID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110000;
+ALTER TABLE `orderinfo_dtl`
+  MODIFY `orderinfo_dtl_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `orderinfo_mst`
+--
+ALTER TABLE `orderinfo_mst`
+  MODIFY `OrderID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110005;
 
 --
 -- AUTO_INCREMENT for table `productcategory`
@@ -535,7 +584,7 @@ ALTER TABLE `producttype`
 -- AUTO_INCREMENT for table `shopingcard`
 --
 ALTER TABLE `shopingcard`
-  MODIFY `ShopingCardID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110009;
+  MODIFY `ShopingCardID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110034;
 
 --
 -- AUTO_INCREMENT for table `userinfo`

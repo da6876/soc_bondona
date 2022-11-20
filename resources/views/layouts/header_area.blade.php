@@ -129,7 +129,7 @@
                                             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                 <!-- ADDED CLASS -->
                                                 <a class="dropdown-item" href="#">Profile</a>
-                                                <a class="dropdown-item" href="#">Orders</a>
+                                                <a class="dropdown-item" href="{{url('OrderInfo')}}">Orders</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="{{url('LogoutCus')}}">Logout</a>
                                             </div>
@@ -147,6 +147,7 @@
                                                 <a class="dropdown-item" href="#" onclick="ShowLoginModal()">Login</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#" onclick="ShowSignUpModal()">SignUp</a>
+                                                <a class="dropdown-item" href="#" onclick="ShowForgetModal()">Forget Pss</a>
                                             </div>
 
                                         </li>
