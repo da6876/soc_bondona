@@ -160,7 +160,7 @@ class UserInfoControler extends Controller{
     public function getAllUserInfo(){
 
         $UserInfo = DB::select("SELECT UserID,LoginID,UserType,Password,FullName,MobileNo,
-        Email,Address,Status,CreateBy,CreateDate,UpdateBy,UpdateDate FROM userinfo where Status!='Delete';");
+        Email,Address,Status,CreateBy,CreateDate,UpdateBy,UpdateDate FROM userinfo where Status BETWEEN 'Active' AND 'InActive' AND Status !='Delete';");
 
         return DataTables::of($UserInfo)
             ->addColumn('action', function ($UserInfo) {

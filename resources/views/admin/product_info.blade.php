@@ -67,10 +67,8 @@
                           <tr>
                             <th>#</th>
                             <th>Product Type</th>
-                            <th>Color</th>
                             <th>Category</th>
                             <th>Sub-Category</th>
-                            <th>Display Type</th>
                             <th>Description</th>
                             <th>Status</th>
                             <th>Create Date</th>
@@ -134,38 +132,19 @@
                     
                     <div class="row g-2">
                         <div class="col mb-6">
+                            <label for="Category" class="form-label">Category</label>
+                            <select class="form-select" id="Category" name="Category" aria-label="Default select example">
+                                <option selected="">Select Product Category</option>
+                            </select>
+                        </div>
+                        <div class="col mb-6">
                           <label for="SubCategory" class="form-label">Product Sub-Category</label>
                           <select class="form-select" id="SubCategory" name="SubCategory" aria-label="Default select example">
                             <option selected="">Select Product Sub-Category</option>
                           </select>
                         </div>
-                        <div class="col mb-6">
-                          <label for="Category" class="form-label">Category</label>
-                          <select class="form-select" id="Category" name="Category" aria-label="Default select example">
-                            <option selected="">Select Product Category</option>
-                          </select>
-                        </div>
-                    </div>
-                    
-                    <div class="row g-2">
-                        <div class="col mb-6">
-                          <label for="Color" class="form-label">Color</label>
-                          <select class="form-select" id="Color" name="Color" aria-label="Default select example">
-                            <option selected="">Select Product Color</option>
-                          </select>
-                        </div>
-                        <div class="col mb-6">
-                          <label for="DisplayType" class="form-label">Display Type</label>
-                          <select class="form-select" id="DisplayType" name="DisplayType" aria-label="Default select example">
-                            <option selected="">Select Product Display Type</option>
-                            <option value="Top">Top</option>
-                            <option value="New">New</option>
-                            <option value="Features">Features</option>
-                          </select>
-                        </div>
                     </div>
 
-              
 
                     <div class="row g-1">
                         <div class="col mb-0">
@@ -294,10 +273,8 @@
       columns: [
           {data: 'ProductID', name: 'ProductID'},
           {data: 'ProductType', name: 'ProductType'},
-          {data: 'Color', name: 'Color'},
           {data: 'Category', name: 'Category'},
           {data: 'SubCategory', name: 'SubCategory'},
-          {data: 'DisplayType', name: 'DisplayType'},
           {data: 'Description', name: 'Description'},
           {data: 'Status', name: 'Status'},
           {data: 'CreateDate', name: 'CreateDate'},
@@ -354,11 +331,9 @@
                 $('.modal-title').text(data[0].FullName+' Information');
                 $('#ProductID').val(data[0].ProductID);
                 $('#ProductType').val(data[0].ProductType);
-                $('#Size').val(data[0].Size);
                 $('#Category').val(data[0].Category);
                 ShowSubCategory(data[0].Category)
                 $('#SubCategory').val(data[0].SubCategory);
-                $('#DisplayType').val(data[0].DisplayType);
                 $('#Description').val(data[0].Description);
                 $('#Details').val(data[0].Details);
                 $('#Material').val(data[0].Material);

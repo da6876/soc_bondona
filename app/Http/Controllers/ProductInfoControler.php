@@ -247,15 +247,13 @@ class ProductInfoControler extends Controller
 
     public function getAllProductInfo(){
 
-        $UserInfo = DB::select("SELECT tb1.ProductID,tb6.name as ProductType,tb3.name as Color,tb4.name as Size,tb2.name as Category ,tb5.name as SubCategory,
+        $UserInfo = DB::select("SELECT tb1.ProductID,tb6.name as ProductType,tb2.name as Category ,tb5.name as SubCategory,
         DisplayType,Description,Details,Material,Care,PriceMRP,PriceDiscount,tb1.Status,
         tb1.CreateBy,tb1.CreateDate,tb1.UpdateBy,tb1.UpdateDate 
-        FROM productinfo tb1,productcategory tb2,productcolor tb3,productsize tb4,productsubcategory tb5,producttype tb6
+        FROM productinfo tb1,productcategory tb2,productsubcategory tb5,producttype tb6
         where tb1.Status != 'Delete'
         AND tb1.ProductType =tb6.ProductTypeId
         AND tb1.Category =tb2.ProductCategoryId
-        AND tb1.Color =tb3.ProductColorId
-        AND tb1.Size =tb4.ProductSizeId
         AND tb1.SubCategory =tb5.ProductSubCategoryId;");
 
         return DataTables::of($UserInfo)

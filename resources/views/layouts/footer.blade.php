@@ -286,8 +286,7 @@
     function SendCode(type) {
         if (type=='SignUp'){
             var number = $("#MobileNo").val();
-            alert(number);
-            firebase.auth().signInWithPhoneNumber(number,window.recaptchaVerifier).then(function (confirmationResult) {
+            firebase.auth().signInWithPhoneNumber("+880"+number,window.recaptchaVerifier).then(function (confirmationResult) {
 
                 window.confirmationResult=confirmationResult;
                 coderesult=confirmationResult;

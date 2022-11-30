@@ -2,7 +2,7 @@
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Bondona | User Info</title>
+    <title>Bondona | Product Stock Info</title>
 
 
     @include('layout.header_links')
@@ -48,11 +48,11 @@
   
                       <div class="collapse navbar-collapse" id="navbar-ex-3">
                         <div class="navbar-nav me-auto">
-                          <a class="nav-item nav-link active" href="javascript:void(0)">SETUP OR CONFIG / <strong> User Info</strong></a>
+                          <a class="nav-item nav-link active" href="javascript:void(0)">SETUP OR CONFIG / <strong> Product Stock Info</strong></a>
                         </div>
   
                         <form onsubmit="return false">
-                          <button class="btn btn-outline-success" onclick="showModal()" type="button">Add New User</button>
+                          <button class="btn btn-outline-success" onclick="showModal()" type="button">Add Product Stock</button>
                         </form>
                       </div>
                     </div>
@@ -60,17 +60,13 @@
                   <hr class="" />
                   <!-- Hoverable Table rows -->
                   <div class="card">
-                    <h5 class="card-header">User Info</h5>
+                    <h5 class="card-header">Product Stock Details</h5>
                     <div class="table-responsive text-nowrap">
                       <table class="table table-hover" id="userInfo-dataTabel">
                         <thead>
                           <tr>
                             <th>#</th>
-                            <th>Login ID</th>
-                            <th>User Type</th>
-                            <th>Full Name</th>
-                            <th>Mobile No</th>
-                            <th>Address</th>
+                            <th>Type Name</th>
                             <th>Status</th>
                             <th>Create Date</th>
                             <th>Update Date</th>
@@ -116,56 +112,13 @@
                 
                 <form id="userInfoDataAdd" action="#" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
-                    <div class="row g-1">
-                        <div class="col mb-0">
-                          <input type="hidden" id="UserID" name="UserID"/>
-                          <label for="FullName" class="form-label">Full Name</label>
-                          <input type="text" id="FullName" name="FullName" class="form-control" placeholder="xxxx@xxx.xx" />
-                        </div>
-                    </div>
                     <div class="row g-2">
-                        <div class="col mb-6">
-                          <label for="MobileNo" class="form-label">MobileNo</label>
-                          <input type="text" id="MobileNo" name="MobileNo" class="form-control" placeholder="xxxx@xxx.xx" />
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Primary1" name="Primary1">
-                            <label class="form-check-label" for="Primary1">
-                              Set As Primary ID
-                            </label>
-                          </div>
+                        <div class="col mb-1">
+                          <input type="hidden" id="ProductTypeId" name="ProductTypeId"/>
+                          <label for="FullName" class="form-label">Product Type Name</label>
+                          <input type="text" id="Name" name="Name" class="form-control" placeholder="xxxx@xxx.xx" />
                         </div>
-                        <div class="col mb-6">
-                          <label for="Email" class="form-label">Email</label>
-                          <input type="email" id="Email" name="Email" class="form-control" placeholder="xxxx@xxx.xx" />
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Primary2" name="Primary2">
-                            <label class="form-check-label" for="Primary2">
-                              Set As Primary ID
-                            </label>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col mb-6">
-                          <label for="Address" class="form-label">Address</label>
-                          <input type="text" id="Address" class="form-control" placeholder="xxxx@xxx.xx" name="Address" />
-                        </div>
-                        <div class="col mb-6">
-                          <label for="Address" class="form-label">Password</label>
-                          <input type="password" id="Password" class="form-control" placeholder="xxxx@xxx.xx" name="Password" />
-                        </div>
-                    </div>
-                    
-                    <div class="row g-1">
-                      <div class="col mb-0">
-                        <label for="UserType" class="form-label">User Type</label>
-                        <select class="form-select" id="UserType" name="UserType" aria-label="Default select example">
-                            <option selected="">Select User Type</option>
-                            <option value="ROOT">ROOT</option>
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="NORMAL">NORMAL</option>
-                        </select>
-                        </div>
+                        
                         <div class="col mb-0">
                           <label for="Status" class="form-label">User Status</label>
                           <select class="form-select" id="Status" name="Status" aria-label="Default select example">
@@ -173,7 +126,7 @@
                               <option value="Active">Active</option>
                               <option value="InActive">InActive</option>
                           </select>
-                          </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -181,7 +134,7 @@
               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                 Close
               </button>
-              <button type="button" onclick="checkData()" class="btn btn-primary">Save changes</button>
+              <button type="button" onclick="addUserType()" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
@@ -189,7 +142,7 @@
     
     @include('layout.footer_links')
     <div class="buy-now">
-        <a href="#" onclick="showModal()" class="btn btn-success btn-buy-now">Add New User</a>
+        <a href="#" onclick="sendPostRequest()" class="btn btn-success btn-buy-now">Add Product Stock</a>
     </div>
 
 
@@ -198,30 +151,9 @@
 
     <script>
 
-      function checkData(){
-        if($('#Primary1').is(":checked") && $('#Primary2').is(":checked") ){
-          swal({
-              title: "Oops",
-              text: "Please Check Only One for Primary or Login ID",
-              timer: '1500'
-          });
-        }else if($('#Primary1').is(":checked")){
-          addUserType();
-        }else if($('#Primary2').is(":checked")){
-          addUserType();
-        }else{
-          swal({
-              title: "Oops",
-              text: "Please Check Only One for Primary or Login ID",
-              timer: '1500'
-          });
-        }
-      }
-
-
       function showModal(){
           $('.userInfoDataAdd form')[0].reset();
-          $('#UserID').val("");
+          $('#ProductTypeId').val("");
           $('.userInfoDataAdd').modal('show');
       }
 
@@ -229,14 +161,10 @@
       var table1 = $('#userInfo-dataTabel').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{!! route('all.UserInfo') !!}',
+        ajax: '{!! route('all.ProductType') !!}',
         columns: [
-            {data: 'UserID', name: 'UserID'},
-            {data: 'LoginID', name: 'LoginID'},
-            {data: 'UserType', name: 'UserType'},
-            {data: 'FullName', name: 'FullName'},
-            {data: 'MobileNo', name: 'MobileNo'},
-            {data: 'Address', name: 'Address'},
+            {data: 'ProductTypeId', name: 'ProductTypeId'},
+            {data: 'Name', name: 'Name'},
             {data: 'Status', name: 'Status'},
             {data: 'CreateDate', name: 'CreateDate'},
             {data: 'UpdateDate', name: 'UpdateDate'},
@@ -244,8 +172,25 @@
         ]
       });
 
+    function sendPostRequest() {
+      url = "http://103.91.54.60/OAA/test.php";
+      $.ajax({
+        url: url,
+        type: "POST",
+        data: {"Name":"aaaa"},
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          console.log(data);
+        }, error: function (data) {
+          console.log(data);
+        }
+      });
+    };
+
+
     function addUserType() {
-        url = "{{ url('UserInfo') }}";
+        url = "{{ url('ProductType') }}";
         $.ajax({
             url: url,
             type: "POST",
@@ -283,31 +228,15 @@
 
     function showUserInfoData(id) {
         $.ajax({
-            url: "{{ url('UserInfo') }}" + '/' + id,
+            url: "{{ url('ProductType') }}" + '/' + id,
             type: "GET",
             dataType: "JSON",
             success: function (data) {
                 $('.userInfoDataAdd form')[0].reset();
                 $('.userInfoDataAdd').modal('show');
-                $('.modal-title').text(data[0].FullName+' Information');
-                $('#UserID').val(data[0].UserID);
-                if(data[0].LoginID==data[0].MobileNo){
-                  $('#Primary1').attr('checked', 'checked');
-                  $('#Primary2').removeAttr('checked');
-                }else if(data[0].LoginID==data[0].Email){
-                  $('#Primary2').attr('checked', 'checked');  
-                  $('#Primary1').removeAttr('checked');              
-                }else{
-                  $('#Primary2').removeAttr('checked');  
-                  $('#Primary1').removeAttr('checked');  
-                }
-                $('#LoginID').val(data[0].LoginID);
-                $('#UserType').val(data[0].UserType);
-                $('#Password').val(data[0].Password);
-                $('#FullName').val(data[0].FullName);
-                $('#MobileNo').val(data[0].MobileNo);
-                $('#Email').val(data[0].Email);
-                $('#Address').val(data[0].Address);
+                $('.modal-title').text(data[0].Name+' Information');
+                $('#ProductTypeId').val(data[0].ProductTypeId);
+                $('#Name').val(data[0].Name);
                 $('#Status').val(data[0].Status);
             }, error: function () {
                 swal({
@@ -319,8 +248,6 @@
             }
         });
     }
-
-
 
     //Delete User Type Data By Ajax
     function  deleteUserInfoData(id) {
@@ -335,7 +262,7 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                        url: "{{ url('UserInfo') }}" + '/' + id,
+                        url: "{{ url('ProductType') }}" + '/' + id,
                         type: "POST",
                         data: {'_method': 'DELETE', '_token': csrf_token},
                         success: function (data) {

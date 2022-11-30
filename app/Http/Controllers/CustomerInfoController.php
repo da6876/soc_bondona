@@ -339,9 +339,9 @@ class CustomerInfoController extends Controller
         $data['CreateDate'] =  $this->getDates();
 
         $ShopInfo = DB::select("SELECT  ShopingCardID,ProductID, ProductCode, Quantity FROM shopingcard
-                                        WHERE CustomerID = ' $CustomerID'");
+                                        WHERE CustomerID = '$CustomerID' and Status ='P'");
 
-        $ShopInfoCount = DB::select("SELECT count(CustomerID) as Total FROM shopingcard WHERE CustomerID = ' $CustomerID'");
+        $ShopInfoCount = DB::select("SELECT count(CustomerID) as Total FROM shopingcard WHERE CustomerID = ' $CustomerID'  and Status ='P' ");
 
         $totalCount = $ShopInfoCount[0]->Total;
 

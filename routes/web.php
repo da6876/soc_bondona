@@ -99,6 +99,10 @@ Route::resource('ProductInfo','ProductInfoControler');
 Route::post('ShowSubList','ProductInfoControler@ShowSubList');
 Route::get('/get/all/ProductInfo','ProductInfoControler@getAllProductInfo')->name('all.ProductInfo');
 
+Route::resource('ProductStock','ProductStockController');
+Route::post('checkAPI','ProductStockController@checkAPI');
+Route::get('/get/all/ProductStock','ProductStockController@getProductType')->name('all.ProductType');
+
 Route::resource('ProductSize','ProductSizeControler');
 Route::get('/get/all/ProductSize','ProductSizeControler@getProductSize')->name('all.ProductSize');
 
